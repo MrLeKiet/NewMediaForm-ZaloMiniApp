@@ -12,14 +12,14 @@ const jobs = [
         id: 1,
         title: "Tuyển Dụng Trưởng Dây Chuyền Sản Xuất Sô Cô La",
         company: companies[0].label,
-        logo: "https://via.placeholder.com/80x80?text=YOURCOMPANY",
+        logo: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/thinking-cat-douglas-sacha.jpg",
         date: "09/09/2025",
     },
     {
         id: 2,
         title: "Tuyển Dụng Đợt 2 Tháng 9/2025",
         company: companies[1].label,
-        logo: "https://via.placeholder.com/80x80?text=YOUR+COMPANY",
+        logo: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/thinking-cat-douglas-sacha.jpg",
         date: "09/09/2025",
     },
 ];
@@ -70,7 +70,7 @@ const JobListPage = () => {
                     <button
                         key={job.id}
                         type="button"
-                        className="flex flex-row items-start gap-4 border border-gray-300 rounded-lg p-4 bg-white shadow-sm h-36 cursor-pointer hover:shadow-md transition text-left focus:outline-none"
+                        className="flex flex-row items-start gap-4 border border-gray-300 rounded-lg p-4 bg-white shadow-sm h-32 cursor-pointer hover:shadow-md transition text-left focus:outline-none"
                         onClick={() => navigate("/job-detail")}
                         onKeyDown={(e) => {
                             if (e.key === "Enter" || e.key === " ") {
@@ -86,8 +86,8 @@ const JobListPage = () => {
                             className="w-16 h-16 object-contain rounded bg-white border flex-shrink-0 mt-1"
                         />
                         <div className="flex-1 flex flex-col items-start min-w-0 justify-between h-full">
-                            <div className="font-bold text-base mb-1 text-gray-950 w-full break-words">{job.title}</div>
-                            <div className="flex items-start text-gray-500 text-sm font-semibold mb-1 w-full min-w-0 break-words">
+                            <div className="font-bold text-sm mb-1 text-gray-950 w-full break-words">{job.title}</div>
+                            <div className="flex items-start text-gray-500 text-xs font-semibold mb-1 w-full min-w-0 break-words">
                                 <Building className="mr-1 w-5 h-5 min-w-[20px] min-h-[20px] max-w-[20px] max-h-[20px] mt-0.5" />
                                 <span className="break-words">{job.company}</span>
                             </div>
