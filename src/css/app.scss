@@ -1,0 +1,11 @@
+:root{
+  --safe-top: var(--zaui-safe-area-inset-top, env(safe-area-inset-top, 30px));
+  --safe-bottom: max(
+    8px,
+    var(--zaui-safe-area-inset-bottom, env(safe-area-inset-bottom, 30px))
+  );
+}
+
+.page {
+  padding: 16px 16px 96px 16px;
+}
