@@ -38,7 +38,7 @@ const JobListPage = () => {
 
     return (
         <Page className="bg-white min-h-screen p-4" style={{ paddingTop: 'var(--safe-top)', paddingBottom: 'var(--safe-bottom)' }}>
-            <div className="mb-4">
+            <div className="mb-4 pt-10">
                 <div className="font-semibold mb-2">
                     Tuyển dụng người lao động Việt Nam vào các vị trí dự kiến tuyển dụng người lao động nước ngoài
                 </div>
