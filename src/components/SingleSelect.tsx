@@ -39,7 +39,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
             {/* Trigger button */}
             <button
                 type="button"
-                className={`w-full flex items-center justify-between px-1 py-1 border-transparent text-base font-medium transition focus:outline-none focus:ring-2 focus:ring-blue-400 ${open ? 'ring-2 ring-blue-400' : ''}`}
+                className={`w-full flex items-center justify-between px-1 py-1 border-transparent text-base font-medium transition focus:outline-none `}
                 onClick={handleOpen}
                 tabIndex={0}
                 aria-haspopup="listbox"

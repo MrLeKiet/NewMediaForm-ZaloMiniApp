@@ -166,7 +166,7 @@ const JobListPage = () => {
                                         placeholder="Tìm kiếm việc làm...."
                                         value={keyword}
                                         onChange={e => handleSearch(e.target.value)}
-                                        className="w-full pl-12 pr-4 py-3 rounded-full bg-white shadow-sm border-0 focus:ring-gray-500 text-base placeholder-gray-400"
+                                        className="w-full pl-12 pr-4 py-3 rounded-full bg-white shadow-sm focus:outline-sky-600 text-base placeholder-gray-400"
                                         aria-label="Tìm kiếm việc làm"
                                     />
                                 </div>
@@ -176,9 +176,9 @@ const JobListPage = () => {
                             </div>
                             {/* Recent search suggestions */}
                             {recentSearches.length > 0 && (
-                                <div className="flex flex-wrap gap-2 mt-1">
+                                <div className="flex flex-wrap gap-2 mt-1 ">
                                     {recentSearches.map((s) => (
-                                        <button key={s} className="px-3 py-1 rounded-full bg-gray-50 text-gray-500 text-xs hover:bg-gray-100 transition" onClick={() => setKeyword(s)}>{s}</button>
+                                        <button key={s} className="px-3 py-1 rounded-full bg-gray-50 text-gray-500 text-xs hover:bg-gray-100 transition " onClick={() => setKeyword(s)}>{s}</button>
                                     ))}
                                 </div>
                             )}
@@ -227,7 +227,7 @@ const JobListPage = () => {
                                 <button
                                     key={job.id}
                                     type="button"
-                                    className="bg-white rounded-xl shadow-sm hover:shadow-lg transition text-left focus:outline-none focus:ring-2 focus:ring-gray-300 group relative cursor-pointer p-3 mb-3"
+                                    className="bg-white rounded-xl shadow-sm hover:shadow-lg transition text-left focus:outline-none focus:ring-gray-300 group relative cursor-pointer p-3 mb-3"
                                     aria-label={`Chi tiết công việc: ${job.title}`}
                                     onClick={() => navigate("/job-detail")}
                                     style={{ touchAction: 'manipulation' }}
