@@ -1,14 +1,14 @@
 import { ChevronDown, Square, SquareCheck, Tally1 } from "lucide-react";
 import React from "react";
 
-export type SingleSelectProps = {
+export type FilterBarProps = {
     options: { value: string; label: string }[];
     value: string;
     onChange: (selected: string) => void;
     placeholder?: string;
 };
 
-const SingleSelect: React.FC<SingleSelectProps> = ({
+const FilterBar: React.FC<FilterBarProps> = ({
     options,
     value,
     onChange,
@@ -27,11 +27,8 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
 
     const handleSelect = (option: string) => {
         setInternal(option);
-    };
-
-    const handleConfirm = () => {
-        onChange(internal);
-        setOpen(false);
+        onChange(option);
+        // Do not close the modal here
     };
 
     return (
@@ -51,7 +48,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                     }
                 }}
             >
-                <span className={value ? "" : "text-gray-400"}>
+                <span className={value ? "" : "text-base font-medium"}>
                     {value ? options.find((o) => o.value === value)?.label : placeholder}
                 </span>
                 <span className="ml-2 flex items-center text-gray-400">
@@ -94,7 +91,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                         {/* Search input */}
                         <input
                             type="text"
-                            className="w-full mb-3 px-3 py-2 border border-transparent rounded focus:outline-none focus:ring"
+                            className="w-full mb-3 px-3 py-2 border border-gray-300 border-2 rounded focus:outline-none focus:ring"
                             placeholder="Tìm kiếm..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
@@ -113,8 +110,8 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                                             type="button"
                                             key={option.value}
                                             className={`w-full text-left py-3 px-2 rounded flex items-center justify-between gap-4 transition-colors ${isSelected
-                                                    ? "text-blue-600 font-semibold bg-blue-50"
-                                                    : "cursor-pointer hover:bg-gray-100"
+                                                ? "text-blue-600 font-semibold bg-blue-50"
+                                                : "cursor-pointer hover:bg-gray-100"
                                                 }`}
                                             onClick={() => handleSelect(option.value)}
                                             tabIndex={0}
@@ -134,19 +131,11 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                         </ul>
                     </div>
 
-                    {/* Confirm button */}
-                    <button
-                        className="bg-blue-600 hover:bg-blue-700 rounded-md h-12 px-6 text-sm text-white transition w-full mt-4 py-2"
-                        onClick={handleConfirm}
-                        disabled={!internal}
-                        type="button"
-                    >
-                        Xác nhận
-                    </button>
+                    {/* Confirm button removed: selection is now immediate */}
                 </div>
             </div>
         </>
     );
 };
 
-export default SingleSelect;
+export default FilterBar;

@@ -10,7 +10,9 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 // Mount the app
+
 import Layout from "@/components/layout";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // Expose app configuration
 import appConfig from "../app-config.json";
@@ -19,5 +21,13 @@ if (!window.APP_CONFIG) {
   window.APP_CONFIG = appConfig as any;
 }
 
+
+const queryClient = new QueryClient();
 const root = createRoot(document.getElementById("app")!);
-root.render(React.createElement(Layout));
+root.render(
+  React.createElement(
+    QueryClientProvider,
+    { client: queryClient },
+    React.createElement(Layout)
+  )
+);
