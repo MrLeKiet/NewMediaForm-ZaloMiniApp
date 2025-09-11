@@ -1,6 +1,7 @@
 import { Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Page, useNavigate } from "zmp-ui";
+import { companyOptions } from "../../constants/companyOptions";
 import CompanySelect from "./CompanySelect";
 
 const companies = [
@@ -50,9 +51,10 @@ const JobListPage = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Filter jobs
-    // No filter: show all jobs
-    const filteredJobs = jobs;
+    // Filter jobs by selected company label
+    const filteredJobs = selectedCompany === "all"
+        ? jobs
+    : jobs.filter(job => job.company === (companyOptions.find(o => o.value === selectedCompany)?.label || selectedCompany));
 
     // Save recent searches
     const handleSearch = (val: string) => {
