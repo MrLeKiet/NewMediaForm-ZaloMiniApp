@@ -1,18 +1,11 @@
-import { Briefcase, Loader2, MapPin } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Button, Page, useNavigate } from "zmp-ui";
+import { Page, useNavigate } from "zmp-ui";
 import CompanySelect from "./CompanySelect";
 
 const companies = [
     { label: "CÔNG TY TNHH TRÀ & CÀ PHÊ VIỆT NAM", value: "tra-ca-phe" },
     { label: "CÔNG TY TNHH DU LỊCH HOA TIÊU THANH ĐẶNG", value: "du-lich-thanh-dang" },
-];
-
-const jobTypes = [
-    { label: "Tất cả", value: "all" },
-    { label: "Full-time", value: "fulltime" },
-    { label: "Part-time", value: "parttime" },
-    { label: "Remote", value: "remote" },
 ];
 
 const jobs = [
@@ -22,79 +15,13 @@ const jobs = [
         company: companies[0].label,
         logo: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/thinking-cat-douglas-sacha.jpg",
         date: "09/09/2025",
-        location: "Hà Nội",
-        type: "fulltime",
-        salary: "20-30 triệu",
-        rating: 4.5,
-        expired: false,
-        negotiable: false,
-        applied: false,
-        saved: false,
-        views: 120,
-        applicants: 12,
-        description: "Quản lý dây chuyền sản xuất sô cô la, đảm bảo chất lượng và tiến độ sản xuất.",
     },
-    {
-        id: 5,
-        title: "Lập Trình Viên ReactJS",
-        company: "CÔNG TY PHẦN MỀM XYZ",
-        logo: "https://randomuser.me/api/portraits/men/65.jpg",
-        date: "07/09/2025",
-        location: "Hồ Chí Minh",
-        type: "remote",
-        salary: "25 triệu",
-        rating: 4.7,
-        expired: false,
-        negotiable: false,
-        applied: false,
-        saved: false,
-        views: 200,
-        applicants: 20,
-        description: "Phát triển giao diện web với ReactJS, làm việc cùng đội ngũ kỹ thuật năng động.",
-    },
-    {
-        id: 6,
-        title: "Nhân Viên Bán Hàng Siêu Thị",
-        company: "SIÊU THỊ BIGMART",
-        logo: "https://randomuser.me/api/portraits/women/12.jpg",
-        date: "06/09/2025",
-        location: "Cần Thơ",
-        type: "parttime",
-        salary: null,
-        rating: 3.5,
-        expired: false,
-        negotiable: true,
-        applied: false,
-        saved: false,
-        views: 30,
-        applicants: 1,
-        description: "Bán hàng, tư vấn sản phẩm cho khách tại siêu thị, làm việc theo ca.",
-    },
-    {
-        id: 7,
-        title: "Tài Xế Xe Tải",
-        company: "CÔNG TY VẬN TẢI NAM BẮC",
-        logo: "https://randomuser.me/api/portraits/men/77.jpg",
-        date: "05/09/2025",
-        location: "Bình Dương",
-        type: "fulltime",
-        salary: "12-15 triệu",
-        rating: 4.1,
-        expired: false,
-        negotiable: false,
-        applied: false,
-        saved: false,
-        views: 50,
-        applicants: 3,
-        description: "Lái xe tải vận chuyển hàng hóa liên tỉnh, đảm bảo an toàn và đúng tiến độ.",
-    }
 ];
 
 const JobListPage = () => {
     const [selectedCompany, setSelectedCompany] = useState("all");
     const [keyword, setKeyword] = useState("");
     const [selectedType, setSelectedType] = useState("all");
-    const [favorites, setFavorites] = useState<number[]>([]);
     const [recentSearches, setRecentSearches] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
     const [displayedJobs, setDisplayedJobs] = useState(8);
@@ -144,17 +71,12 @@ const JobListPage = () => {
 
     return (
         <Page className="bg-[#f4f4f4] min-h-screen p-4" style={{ paddingTop: 'var(--safe-top)', paddingBottom: 'var(--safe-bottom)' }}>
-            <div className="mb-4 pt-10">
+            <div className="mb-4">
                 <div className="flex flex-col gap-2 md:flex-row md:items-end">
                     <div className="pt-2 pb-2 md:px-0">
                         <div className="flex flex-col gap-3 max-w-2xl mx-auto">
                             <div className="flex items-center justify-between">
                                 <div className="text-2xl font-bold">Việc làm</div>
-                                <button className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow text-gray-500 hover:bg-gray-100" aria-label="Thông báo">
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                                    </svg>
-                                </button>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="relative flex-1">
@@ -170,9 +92,6 @@ const JobListPage = () => {
                                         aria-label="Tìm kiếm việc làm"
                                     />
                                 </div>
-                                <Button className="w-12 h-12 rounded-full bg-gray-400 text-white flex items-center justify-center shadow-none text-xl p-0 min-w-0" type="highlight" aria-label="Tìm kiếm">
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
-                                </Button>
                             </div>
                             {/* Recent search suggestions */}
                             {recentSearches.length > 0 && (
@@ -220,9 +139,6 @@ const JobListPage = () => {
                     } else {
                         return filteredJobs.slice(0, displayedJobs).map((job, idx) => {
                             let typeLabel = '';
-                            if (job.type === 'fulltime') typeLabel = 'Full-time';
-                            else if (job.type === 'parttime') typeLabel = 'Part-time';
-                            else if (job.type === 'remote') typeLabel = 'Remote';
                             return (
                                 <button
                                     key={job.id}
@@ -239,31 +155,10 @@ const JobListPage = () => {
                                                 {getAvatar(job.logo, job.company)}
                                             </div>
                                             {/* Title and company */}
-                                            <div className="flex-1 min-w-0">
+                                            <div className="flex-1 min-w-0 gap-1">
                                                 <div className="font-semibold text-[16px] text-gray-900 line-clamp-2">{job.title}</div>
-                                                <div className="text-xs text-gray-500 truncate mb-1">{job.company}</div>
-
-                                            </div>
-                                        </div>
-                                        <div>
-                                            {/* Filter chips */}
-                                            <div className="flex flex-wrap gap-2 mb-2">
-                                                <span className="px-3 py-0.5 rounded-full bg-gray-100 text-gray-700 text-xs font-medium flex items-center gap-1">
-                                                    <MapPin className="w-3 h-3" /> {job.location}
-                                                </span>
-                                                {typeLabel && (
-                                                    <span className="px-3 py-0.5 rounded-full bg-gray-100 text-gray-700 text-xs font-medium flex items-center gap-1">
-                                                        <Briefcase className="w-3 h-3" /> {typeLabel}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            {/* Meta info and Apply button */}
-                                            <div className="flex items-center justify-between mt-2">
-                                                <div className="flex gap-3 text-xs text-gray-500">
-                                                    {/* <span>{job.date || '2 days ago'}</span> */}
-                                                    <span>{job.views || 220} Views</span>
-                                                    <span>{job.applicants || 13} Applicants</span>
-                                                </div>
+                                                <div className="text-xs text-gray-500 truncate line-clamp-1">{job.company}</div>
+                                                <span className="text-xs text-gray-500 truncate ">{"Ngày đăng tuyển: " + job.date}</span>
                                             </div>
                                         </div>
                                     </div>

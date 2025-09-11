@@ -17,7 +17,7 @@ const CompanySelect: React.FC<{
 }> = ({ value, onChange }) => {
     return (
         <div className="w-full">
-            <label className="block text-lg font-medium text-gray-900 mb-1 ml-1">Doanh nghiệp</label>
+            {/* <label className="block text-lg font-medium text-gray-900 mb-1 ml-1">Doanh nghiệp</label> */}
             <div className="rounded-xl shadow bg-white px-2 py-1">
                 <SingleSelect
                     options={companyOptions}

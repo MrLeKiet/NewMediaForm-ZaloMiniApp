@@ -44,8 +44,8 @@ const JobDetailPage = () => {
                 <div className="absolute left-0 top-0 w-full h-1 rounded-t-lg bg-orange-500" style={{borderTopLeftRadius: '0.5rem', borderTopRightRadius: '0.5rem'}} />
                 <div className="font-bold text-orange-500 mb-2 mt-2">{jobDetail.sectionTitle}</div>
                 <ul className="text-gray-800 text-sm space-y-1">
-                    {jobDetail.details.map((item, idx) => (
-                        <li key={idx} dangerouslySetInnerHTML={{ __html: item }} />
+                    {jobDetail.details.map((item) => (
+                        <li key={item} dangerouslySetInnerHTML={{ __html: item }} />
                     ))}
                 </ul>
             </div>
