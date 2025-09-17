@@ -30,14 +30,14 @@ const RecruitmentCard: React.FC<RecruitmentCardProps> = ({ id, title, thumbnail,
 					<div className="flex gap-3 items-start">
 						{/* Logo / Thumbnail */}
 						<div className="flex-shrink-0 w-14 h-14 rounded overflow-hidden bg-white border border-gray-200 flex items-center justify-center">
-													<img
-														src={thumbnail}
-														alt={title}
-														className="w-full h-full object-cover"
-														onError={(e) =>
-														((e.target as HTMLImageElement).src =
-															import.meta.env.VITE_PLACEHOLDER_IMG)
-														}
+							<img
+								src={thumbnail}
+								alt={title}
+								className="w-full h-full object-cover"
+								onError={(e) =>
+								((e.target as HTMLImageElement).src =
+									import.meta.env.VITE_PLACEHOLDER_IMG)
+								}
 							/>
 						</div>
 

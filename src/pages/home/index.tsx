@@ -1,7 +1,7 @@
 
 
 
-import FilterBar from "@/components/filterbar";
+import FilterBar from "@/components/filterBar";
 import { useFilterOptions } from "@/components/filtterOptions";
 import RecruitmentCard from "@/components/recruitmentCard";
 import axios from "axios";
