@@ -91,7 +91,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                         {/* Search input */}
                         <input
                             type="text"
-                            className="w-full mb-3 px-3 py-2 border border-gray-300 border-2 rounded focus:outline-none focus:ring"
+                            className="w-full mb-3 px-3 py-2 border-gray-300 border-2 rounded focus:outline-none focus:ring"
                             placeholder="Tìm kiếm..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}

@@ -413,7 +413,7 @@ const RegisterPage: React.FC = () => {
         setLoading(true);
         setMessage(null);
         // Validate desired job selection
-        if (!(formData as any).desiredJob || (formData as any).desiredJob.length === 0) {
+        if (!formData.desiredJob || formData.desiredJob.length === 0) {
             setMessage("Vui lòng chọn ít nhất một ngành nghề mong muốn.");
             setLoading(false);
             return;
