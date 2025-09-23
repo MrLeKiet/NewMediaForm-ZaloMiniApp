@@ -1,5 +1,5 @@
 {
-  "name": "newinfo-form",
+  "name": "jobfinder",
   "private": true,
   "version": "1.0.0",
   "description": "zmp-blank-templates",
@@ -26,7 +26,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-query": "^3.39.3",
-    "zmp-sdk": "latest",
+    "zmp-sdk": "^2.9.4",
     "zmp-ui": "latest"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "cross-env": "^7.0.3",
     "postcss": "^8.4.38",
     "postcss-cli": "^8.3.1",
-    "postcss-preset-env": "^6.7.0",
+    "postcss-preset-env": "^10.4.0",
     "sass": "^1.76.0",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.13",
