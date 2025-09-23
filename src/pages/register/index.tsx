@@ -41,8 +41,8 @@ const PersonalInfoRow1: React.FC<any> = ({
         <InputBox
             label="Họ và Tên"
             icon={<User size={18} />}
-            error={touched.fullName && !formData.fullName}
-            errorMessage={touched.fullName && !formData.fullName ? "Vui lòng nhập giá trị" : undefined}
+            error={touched.fullName && !!formData.errors?.fullName}
+            errorMessage={touched.fullName ? formData.errors?.fullName : undefined}
         >
             <Input
                 placeholder="Nhập họ và tên"
@@ -53,15 +53,25 @@ const PersonalInfoRow1: React.FC<any> = ({
                 className="input-field"
             />
         </InputBox>
-        <InputBox label="Ngày sinh" icon={<Calendar size={18} />}>
-            <DatePicker
-                value={formData.birthDate}
-                onChange={handleDateChange("birthDate")}
-                placeholder="Chọn ngày"
-                label={undefined}
-            />
-        </InputBox>
-        <InputBox label="Giới tính" icon={<Venus size={18} />}>
+        <InputBox
+                label="Ngày sinh"
+                icon={<Calendar size={18} />}
+                error={touched.birthDate && !!formData.errors?.birthDate}
+                errorMessage={touched.birthDate ? formData.errors?.birthDate : undefined}
+            >
+                <DatePicker
+                    value={formData.birthDate}
+                    onChange={handleDateChange("birthDate")}
+                    placeholder="Chọn ngày"
+                    label={undefined}
+                />
+            </InputBox>
+        <InputBox
+            label="Giới tính"
+            icon={<Venus size={18} />}
+            error={touched.gender && !!formData.errors?.gender}
+            errorMessage={touched.gender ? formData.errors?.gender : undefined}
+        >
             <SingleSelect
                 options={settings?.ListGenderUser || []}
                 value={formData.gender}
@@ -83,8 +93,8 @@ const PersonalInfoRow2: React.FC<any> = ({
         <InputBox
             label="Căn Cước Công Dân"
             icon={<IdCard size={18} />}
-            error={touched.idCard && !formData.idCard}
-            errorMessage={touched.idCard && !formData.idCard ? "Vui lòng nhập giá trị" : undefined}
+            error={touched.idCard && !!formData.errors?.idCard}
+            errorMessage={touched.idCard ? formData.errors?.idCard : undefined}
         >
             <Input
                 placeholder="Nhập số CCCD"
@@ -95,19 +105,24 @@ const PersonalInfoRow2: React.FC<any> = ({
                 className="input-field"
             />
         </InputBox>
-        <InputBox label="Ngày cấp" icon={<Calendar size={18} />}>
-            <DatePicker
-                value={formData.issueDate}
-                onChange={handleDateChange("issueDate")}
-                placeholder="Chọn ngày"
-                label={undefined}
-            />
-        </InputBox>
+        <InputBox 
+                label="Ngày cấp" 
+                icon={<Calendar size={18} />} 
+                error={touched.issueDate && !!formData.errors?.issueDate}
+                errorMessage={touched.issueDate ? formData.errors?.issueDate : undefined}
+            >
+                <DatePicker
+                    value={formData.issueDate}
+                    onChange={handleDateChange("issueDate")}
+                    placeholder="Chọn ngày"
+                    label={undefined}
+                />
+            </InputBox>
         <InputBox
             label="Nơi cấp"
             icon={<MapPin size={18} />}
-            error={touched.issuePlace && !formData.issuePlace}
-            errorMessage={touched.issuePlace && !formData.issuePlace ? "Vui lòng nhập giá trị" : undefined}
+            error={touched.issuePlace && !!formData.errors?.issuePlace}
+            errorMessage={touched.issuePlace ? formData.errors?.issuePlace : undefined}
         >
             <Input
                 placeholder="Nơi cấp"
@@ -133,8 +148,8 @@ const PersonalInfoRow3: React.FC<any> = ({
         <InputBox
             label="Số điện thoại"
             icon={<Phone size={18} />}
-            error={touched.phone && !formData.phone}
-            errorMessage={touched.phone && !formData.phone ? "Vui lòng nhập giá trị" : undefined}
+            error={touched.phone && !!formData.errors?.phone}
+            errorMessage={touched.phone ? formData.errors?.phone : undefined}
         >
             <Input
                 placeholder="Nhập số điện thoại"
@@ -151,8 +166,8 @@ const PersonalInfoRow3: React.FC<any> = ({
         <InputBox
             label="Email"
             icon={<Mail size={18} />}
-            error={touched.email && !formData.email}
-            errorMessage={touched.email && !formData.email ? "Vui lòng nhập giá trị" : undefined}
+            error={touched.email && !!formData.errors?.email}
+            errorMessage={touched.email ? formData.errors?.email : undefined}
         >
             <Input
                 placeholder="Nhập email"
@@ -163,7 +178,12 @@ const PersonalInfoRow3: React.FC<any> = ({
                 className="input-field"
             />
         </InputBox>
-        <InputBox label="Dân tộc" icon={<GraduationCap size={18} />}>
+        <InputBox
+            label="Dân tộc"
+            icon={<GraduationCap size={18} />}
+            error={touched.ethnicity && !!formData.errors?.ethnicity}
+            errorMessage={touched.ethnicity ? formData.errors?.ethnicity : undefined}
+        >
             <SingleSelect
                 options={settings?.ListEthnicity || []}
                 value={formData.ethnicity}
@@ -186,8 +206,8 @@ const PersonalInfoRow4: React.FC<any> = ({
         <InputBox
             label="Địa chỉ liên lạc"
             icon={<MapPin size={18} />}
-            error={touched.address && !formData.address}
-            errorMessage={touched.address && !formData.address ? "Vui lòng nhập giá trị" : undefined}
+            error={touched.address && !!formData.errors?.address}
+            errorMessage={touched.address ? formData.errors?.address : undefined}
         >
             <Input
                 placeholder="Nhập địa chỉ"
@@ -198,7 +218,12 @@ const PersonalInfoRow4: React.FC<any> = ({
                 className="input-field"
             />
         </InputBox>
-        <InputBox label="Trình độ học vấn" icon={<GraduationCap size={18} />}>
+        <InputBox
+            label="Trình độ học vấn"
+            icon={<GraduationCap size={18} />}
+            error={touched.educationLevel && !!formData.errors?.educationLevel}
+            errorMessage={touched.educationLevel ? formData.errors?.educationLevel : undefined}
+        >
             <Input
                 placeholder="Nhập trình độ học vấn"
                 value={formData.educationLevel}
@@ -208,7 +233,12 @@ const PersonalInfoRow4: React.FC<any> = ({
                 className="input-field"
             />
         </InputBox>
-        <InputBox label="Trình độ CMKT cao nhất" icon={<GraduationCap size={18} />}>
+        <InputBox
+            label="Trình độ CMKT cao nhất"
+            icon={<GraduationCap size={18} />}
+            error={touched.cmktLevel && !!formData.errors?.cmktLevel}
+            errorMessage={touched.cmktLevel ? formData.errors?.cmktLevel : undefined}
+        >
             <SingleSelect
                 options={settings?.TechnicalLevel || []}
                 value={formData.cmktLevel}
@@ -231,8 +261,8 @@ const PersonalInfoRow5: React.FC<any> = ({
         <InputBox
             label="Chuyên ngành đào tạo"
             icon={<GraduationCap size={18} />}
-            error={touched.major && !formData.major}
-            errorMessage={touched.major && !formData.major ? "Vui lòng nhập giá trị" : undefined}
+            error={touched.major && !!formData.errors?.major}
+            errorMessage={touched.major ? formData.errors?.major : undefined}
         >
             <Input
                 placeholder="Nhập chuyên ngành đào tạo"
@@ -246,8 +276,8 @@ const PersonalInfoRow5: React.FC<any> = ({
         <InputBox
             label="Tên trường tốt nghiệp"
             icon={<Building size={18} />}
-            error={touched.school && !formData.school}
-            errorMessage={touched.school && !formData.school ? "Vui lòng nhập giá trị" : undefined}
+            error={touched.school && !!formData.errors?.school}
+            errorMessage={touched.school ? formData.errors?.school : undefined}
         >
             <Input
                 placeholder="Nhập tên trường"
@@ -258,7 +288,12 @@ const PersonalInfoRow5: React.FC<any> = ({
                 className="input-field"
             />
         </InputBox>
-        <InputBox label="Ngành nghề mong muốn" icon={<Briefcase size={18} />}>
+        <InputBox
+            label="Ngành nghề mong muốn"
+            icon={<Briefcase size={18} />}
+            error={touched.desiredJob && !!formData.errors?.desiredJob}
+            errorMessage={touched.desiredJob ? formData.errors?.desiredJob : undefined}
+        >
             <MultiSelect
                 options={settings?.ListJob || []}
                 value={formData.desiredJob}
@@ -276,7 +311,7 @@ const PersonalInfoSection: React.FC<any> = (props) => (
             Thông tin cá nhân
         </Text>
         <PersonalInfoRow1 {...props} settings={props.settings} />
-        <PersonalInfoRow2 {...props} />
+        <PersonalInfoRow2 {...props} settings={props.settings} />
         <PersonalInfoRow3 {...props} settings={props.settings} />
         <PersonalInfoRow4 {...props} settings={props.settings} />
         <PersonalInfoRow5 {...props} settings={props.settings} />
@@ -312,6 +347,8 @@ const RegisterPage: React.FC = () => {
         handleSelectChange,
         handleDateChange,
         setFormData,
+        setTouched,
+        validateForm,
     } = useRegisterForm();
 
     useEffect(() => {
@@ -412,9 +449,21 @@ const RegisterPage: React.FC = () => {
         e.preventDefault();
         setLoading(true);
         setMessage(null);
-        // Validate desired job selection
-        if (!formData.desiredJob || formData.desiredJob.length === 0) {
-            setMessage("Vui lòng chọn ít nhất một ngành nghề mong muốn.");
+        // Validate all fields before submitting
+        const isValid = validateForm();
+        if (!isValid) {
+            // Mark all required fields as touched to show errors
+            setTouched((prev: any) => {
+                const allTouched: { [key: string]: boolean } = { ...prev };
+                [
+                    "fullName", "birthDate", "gender", "idCard", "issueDate", "issuePlace",
+                    "phone", "email", "ethnicity", "address", "educationLevel", "cmktLevel",
+                    "major", "school", "desiredJob"
+                ].forEach((field) => {
+                    allTouched[field] = true;
+                });
+                return allTouched;
+            });
             setLoading(false);
             return;
         }
@@ -484,13 +533,6 @@ const RegisterPage: React.FC = () => {
                     </Box>
                 </Box>
 
-                {/* Show message */}
-                {message && (
-                    <Box className="mb-4">
-                        <Text className="text-red-500">{message}</Text>
-                    </Box>
-                )}
-
                 {/* Form */}
                 <form
                     onSubmit={handleSubmit}
@@ -509,6 +551,11 @@ const RegisterPage: React.FC = () => {
                     {/* Bottom: Note + Buttons */}
                     <Box className="lg:col-span-4 mt-6 sm:mt-8 flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0 lg:space-x-4">
                         <Text className="text-sm text-gray-500">(*) Vui lòng nhập đầy đủ thông tin</Text>
+                        {message && (
+                            <Box className="mb-4">
+                                <Text className="text-red-500">{message}</Text>
+                            </Box>
+                        )}
                         <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
                             <Button
                                 variant="primary"
@@ -529,3 +576,4 @@ const RegisterPage: React.FC = () => {
 };
 
 export default RegisterPage;
+

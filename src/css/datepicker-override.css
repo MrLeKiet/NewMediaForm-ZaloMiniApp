@@ -4,3 +4,9 @@
     border: none !important;
     box-shadow: none !important;
 }
+
+.input-wrapper.border-red-500 .zaui-date-picker,
+.input-wrapper.border-red-500 .zaui-date-picker input,
+.input-wrapper.border-red-500 .zaui-date-picker .zaui-input {
+    background-color: #fef2f2 !important; 
+}

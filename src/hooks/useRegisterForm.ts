@@ -34,17 +34,20 @@ export function useRegisterForm() {
 
     // Validation logic for required fields and formats
     const requiredFields: { [key: string]: string } = {
-        fullName: "Vui lòng nhập họ và tên",
+        fullName: "Vui lòng nhập Họ và Tên",
         birthDate: "Vui lòng chọn ngày sinh",
         gender: "Vui lòng chọn giới tính",
         idCard: "Vui lòng nhập số CCCD",
-        issueDate: "Vui lòng chọn ngày cấp",
-        issuePlace: "Vui lòng nhập nơi cấp",
+        issueDate: "Vui lòng chọn ngày cấp CCCD",
+        issuePlace: "Vui lòng nhập nơi cấp CCCD",
         phone: "Vui lòng nhập số điện thoại",
         email: "Vui lòng nhập email",
-        address: "Vui lòng nhập địa chỉ",
+        ethnicity: "Vui lòng chọn dân tộc",
+        address: "Vui lòng nhập địa chỉ liên lạc",
+        educationLevel: "Vui lòng nhập trình độ học vấn",
+        cmktLevel: "Vui lòng chọn Trình độ CMKT cao nhất",
         major: "Vui lòng nhập chuyên ngành đào tạo",
-        school: "Vui lòng nhập tên trường tốt nghiệp",
+        school: "Vui lòng nhập Tên trường tốt nghiệp",
         desiredJob: "Vui lòng chọn ngành nghề mong muốn",
     };
 
@@ -85,7 +88,7 @@ export function useRegisterForm() {
             return requiredFields["email"];
         }
         if (!/^\S+@\S+\.\S+$/.test(value)) {
-            return "Email không hợp lệ";
+            return "Địa chỉ email không hợp lệ, ví dụ: mailer@yourcompany.com";
         }
         return "";
     }
@@ -94,8 +97,13 @@ export function useRegisterForm() {
         if (!value) {
             return requiredFields["phone"];
         }
-        if (!/^0\d{9,10}$/.test(value)) {
-            return "Số điện thoại không hợp lệ";
+        // Check for non-digit characters
+        if (/\D/.test(value)) {
+            return "Số điện thoại sai";
+        }
+        // Must be exactly 10 digits, start with 0
+        if (!/^0\d{9}$/.test(value)) {
+            return "Số điện thoại sai";
         }
         return "";
     }
@@ -128,7 +136,7 @@ export function useRegisterForm() {
     };
 
     return {
-        formData,
+        formData: { ...formData, errors },
         setFormData,
         touched,
         setTouched,

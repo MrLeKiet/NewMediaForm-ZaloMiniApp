@@ -13,7 +13,7 @@ const AuthPage = () => {
                 const accessToken = await getAccessToken();
                 const userID = await getUserID();
                 const userInfo = await getUserInfo({ autoRequestPermission: true });
-                // Debug log for APP_ID
+                // Debug log
                 console.log("Accesstoken:", accessToken);
                 console.log("Code:", phoneToken);
                 console.log("ZaloId:", userID);
