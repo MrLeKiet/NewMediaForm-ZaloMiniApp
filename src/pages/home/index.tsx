@@ -1,12 +1,10 @@
-
-
-
-import FilterBar from "@/components/filterBar";
-import { useFilterOptions } from "@/components/filtterOptions";
-import RecruitmentCard from "@/components/recruitmentCard";
+import FilterBar from "@/components/FilterBar";
+import { useFilterOptions } from "@/components/FiltterOptions";
+import RecruitmentCard from "@/components/RecruitmentCard";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Page } from "zmp-ui";
+
 
 interface Job {
   id: string;
@@ -17,7 +15,6 @@ interface Job {
 }
 
 function HomePage() {
-  // State
   const [search, setSearch] = useState("");
   const [selectedFilter, setSelectedFilter] = useState<string>("");
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -63,6 +60,7 @@ function HomePage() {
   }, [search, selectedFilter]);
 
   return (
+
     <Page className="bg-[#f4f4f4] min-h-screen p-4" style={{ paddingTop: 'var(--safe-top)', paddingBottom: 'var(--safe-bottom)' }}>
       <div className="mb-4">
         <div className="flex flex-col gap-2 md:flex-row md:items-end">
@@ -100,24 +98,28 @@ function HomePage() {
         </div>
       </div>
       <div className="flex flex-col gap-1">
-        {loading ? (
-          <p>Đang tìm kiếm...</p>
-        ) : jobs.length > 0 ? (
-          <ul className="space-y-6">
-            {jobs.map((job) => (
-              <RecruitmentCard
-                key={job.id}
-                id={job.id}
-                title={job.title}
-                thumbnail={job.thumbnail}
-                company={job.company}
-                publishdate={job.publishdate}
-              />
-            ))}
-          </ul>
-        ) : (
-          <p>Không có dữ liệu tuyển dụng.</p>
-        )}
+        {(() => {
+          if (loading) {
+            return <p>Đang tìm kiếm...</p>;
+          }
+          if (jobs.length > 0) {
+            return (
+              <ul className="space-y-6">
+                {jobs.map((job) => (
+                  <RecruitmentCard
+                    key={job.id}
+                    id={job.id}
+                    title={job.title}
+                    thumbnail={job.thumbnail}
+                    company={job.company}
+                    publishdate={job.publishdate}
+                  />
+                ))}
+              </ul>
+            );
+          }
+          return <p>Không có dữ liệu tuyển dụng.</p>;
+        })()}
       </div>
     </Page>
   );
