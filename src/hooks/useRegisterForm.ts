@@ -87,6 +87,26 @@ export function useRegisterForm() {
         if (!value) {
             return requiredFields["email"];
         }
+        // Check for spaces
+        if (/\s/.test(value)) {
+            return "Email không được chứa khoảng trắng.";
+        }
+        // Check for @ symbol
+        if (!value.includes("@")) {
+            return "Email phải chứa ký tự @.";
+        }
+        // Check for domain part
+        const parts = value.split("@");
+        if (parts.length !== 2 || !parts[1]) {
+            return "Email phải có phần tên miền sau ký tự @.";
+        }
+        // Check for dot and at least 2+ chars after last dot
+        const domain = parts[1];
+        const lastDot = domain.lastIndexOf(".");
+        if (lastDot === -1 || domain.length - lastDot <= 2) {
+            return "Tên miền email phải có dấu chấm và phần mở rộng hợp lệ, ví dụ: .com, .edu, .vn, .org, .jp";
+        }
+        // Basic format check
         if (!/^\S+@\S+\.\S+$/.test(value)) {
             return "Địa chỉ email không hợp lệ, ví dụ: mailer@yourcompany.com";
         }
