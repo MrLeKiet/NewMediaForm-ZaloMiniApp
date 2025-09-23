@@ -10,6 +10,8 @@ import { AppProps } from "zmp-ui/app";
 
 import JobDetailPage from "@/pages/detail";
 import HomePage from "@/pages/home";
+import AuthPage from "@/pages/auth";
+import RegisterPage from "@/pages/register/index";
 
 const Layout = () => {
   return (
@@ -17,8 +19,10 @@ const Layout = () => {
       <SnackbarProvider>
         <ZMPRouter>
           <AnimationRoutes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<AuthPage/>} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/detail/:id" element={<JobDetailPage />} />
+            <Route path="/register" element={<RegisterPage />} />
           </AnimationRoutes>
         </ZMPRouter>
       </SnackbarProvider>

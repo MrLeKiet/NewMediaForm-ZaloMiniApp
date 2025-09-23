@@ -130,8 +130,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
                                 })}
                         </ul>
                     </div>
-
-                    {/* Confirm button removed: selection is now immediate */}
                 </div>
             </div>
         </>
