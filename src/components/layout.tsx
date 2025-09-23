@@ -11,8 +11,8 @@ import { AppProps } from "zmp-ui/app";
 import JobDetailPage from "@/pages/detail";
 import HomePage from "@/pages/home";
 import AuthPage from "@/pages/auth";
-import RegisterPage from "@/pages/register/index";
-
+import RegisterPage from "@/pages/register";
+import LoginPage from "@/pages/login";
 const Layout = () => {
   return (
     <App theme={getSystemInfo().zaloTheme as AppProps["theme"]}>
@@ -23,6 +23,7 @@ const Layout = () => {
             <Route path="/home" element={<HomePage />} />
             <Route path="/detail/:id" element={<JobDetailPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
           </AnimationRoutes>
         </ZMPRouter>
       </SnackbarProvider>

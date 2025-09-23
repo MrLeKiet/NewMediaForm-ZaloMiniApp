@@ -114,8 +114,8 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                                         type="button"
                                         key={option.value}
                                         className={`w-full text-left py-3 px-2 rounded flex items-center justify-between gap-4 transition-colors ${isSelected
-                                                ? "text-blue-600 font-semibold bg-blue-50"
-                                                : "hover:bg-gray-100 cursor-pointer"
+                                            ? "text-blue-600 font-semibold bg-blue-50"
+                                            : "hover:bg-gray-100 cursor-pointer"
                                             }`}
                                         onClick={() => handleSelect(option.value)}
                                     >

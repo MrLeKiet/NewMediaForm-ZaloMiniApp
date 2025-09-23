@@ -1,23 +1,44 @@
 
 
 import { useEffect } from "react";
-import { getAccessToken, getPhoneNumber, getUserInfo } from "zmp-sdk/apis";
+import { getAccessToken, getPhoneNumber, getUserInfo, getUserID } from "zmp-sdk/apis";
 import { useNavigate } from "zmp-ui";
 
 const AuthPage = () => {
     const navigate = useNavigate();
-
     useEffect(() => {
         const checkAuthorize = async () => {
-            
             try {
                 const phoneToken = await getPhoneNumber();
                 const accessToken = await getAccessToken();
+                const userID = await getUserID();
                 const userInfo = await getUserInfo({ autoRequestPermission: true });
-                console.log("Token:", phoneToken.token);
-                console.log("AccessToken:", accessToken);
-                console.log("UserInfo:", userInfo);
-                navigate("/register", { state: { userInfo } });
+                // Debug log for APP_ID
+                console.log("Accesstoken:", accessToken);
+                console.log("Code:", phoneToken);
+                console.log("ZaloId:", userID);
+                // Try to login via API
+                const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/SignIn`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                        "Accept-Language": "2"
+                    },
+                    body: JSON.stringify({
+                        Accesstoken: accessToken || "",
+                        Code: phoneToken.token || "",
+                        ZaloId: userID || ""
+                    })
+                });
+                const data = await res.json();
+                if (data.StatusResult?.Code === 0) {
+                    // Login success
+                    navigate("/home");
+                } else {
+                    // Not registered, go to register
+                    navigate("/register", { state: { userInfo } });
+                }
             } catch (err) {
                 console.error("Authorization error:", err);
                 location.reload();
