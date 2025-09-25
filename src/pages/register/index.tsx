@@ -54,18 +54,18 @@ const PersonalInfoRow1: React.FC<any> = ({
             />
         </InputBox>
         <InputBox
-                label="Ngày sinh"
-                icon={<Calendar size={18} />}
-                error={touched.birthDate && !!formData.errors?.birthDate}
-                errorMessage={touched.birthDate ? formData.errors?.birthDate : undefined}
-            >
-                <DatePicker
-                    value={formData.birthDate}
-                    onChange={handleDateChange("birthDate")}
-                    placeholder="Chọn ngày"
-                    label={undefined}
-                />
-            </InputBox>
+            label="Ngày sinh"
+            icon={<Calendar size={18} />}
+            error={touched.birthDate && !!formData.errors?.birthDate}
+            errorMessage={touched.birthDate ? formData.errors?.birthDate : undefined}
+        >
+            <DatePicker
+                value={formData.birthDate}
+                onChange={handleDateChange("birthDate")}
+                placeholder="Chọn ngày"
+                label={undefined}
+            />
+        </InputBox>
         <InputBox
             label="Giới tính"
             icon={<Venus size={18} />}
@@ -105,19 +105,19 @@ const PersonalInfoRow2: React.FC<any> = ({
                 className="input-field"
             />
         </InputBox>
-        <InputBox 
-                label="Ngày cấp" 
-                icon={<Calendar size={18} />} 
-                error={touched.issueDate && !!formData.errors?.issueDate}
-                errorMessage={touched.issueDate ? formData.errors?.issueDate : undefined}
-            >
-                <DatePicker
-                    value={formData.issueDate}
-                    onChange={handleDateChange("issueDate")}
-                    placeholder="Chọn ngày"
-                    label={undefined}
-                />
-            </InputBox>
+        <InputBox
+            label="Ngày cấp"
+            icon={<Calendar size={18} />}
+            error={touched.issueDate && !!formData.errors?.issueDate}
+            errorMessage={touched.issueDate ? formData.errors?.issueDate : undefined}
+        >
+            <DatePicker
+                value={formData.issueDate}
+                onChange={handleDateChange("issueDate")}
+                placeholder="Chọn ngày"
+                label={undefined}
+            />
+        </InputBox>
         <InputBox
             label="Nơi cấp"
             icon={<MapPin size={18} />}
@@ -523,8 +523,9 @@ const RegisterPage: React.FC = () => {
     }
 
     return (
-        <Page className="bg-gray-100 p-4 min-h-screen" style={{ paddingTop: 'var(--safe-top)', paddingBottom: 'var(--safe-bottom)' }}>
-            <Box className="card-section">
+        // <Page className="bg-gray-100 p-4 min-h-screen" style={{ paddingTop: 'var(--safe-top)', paddingBottom: 'var(--safe-bottom)' }}>
+        <Box className="mb-12">
+            <Box className="card-section ">
                 {/* Title */}
                 <Box className="flex justify-center mb-6 sm:mb-8">
                     <Box className="flex items-center space-x-2">
@@ -571,7 +572,8 @@ const RegisterPage: React.FC = () => {
                     </Box>
                 </form>
             </Box>
-        </Page>
+        </Box>
+        // </Page>
     );
 };
 
