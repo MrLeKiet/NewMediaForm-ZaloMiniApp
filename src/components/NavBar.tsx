@@ -12,12 +12,16 @@ const NAV_ITEMS = [
 const Navbar: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const currentPath = location.pathname;
+    const currentPath = location.pathname || "/home"; // Default to "/home" if pathname is falsy
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-white shadow z-50 flex justify-around items-center h-16 border-t">
+        <nav className="fixed bottom-0 left-0 right-0 bg-white shadow z-50 flex justify-around items-center h-[10%] border-t" style={{ paddingBottom: 'var(--safe-bottom)' }}>
             {NAV_ITEMS.map((item) => {
-                const isActive = currentPath === item.path;
+                // Always highlight home if currentPath is empty or "/"
+                const isActive =
+                    (!currentPath || currentPath === "/") && item.path === "/home"
+                        ? true
+                        : currentPath === item.path;
                 return (
                     <button
                         key={item.path}
@@ -27,7 +31,7 @@ const Navbar: React.FC = () => {
                         <span className={isActive ? "text-blue-600" : "text-gray-400"}>{item.icon}</span>
                         <span className={`text-xs mt-1 ${isActive ? "text-blue-600 font-semibold" : "text-gray-500"}`}>{item.label}</span>
                         {isActive && (
-                            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-600 rounded-t" />
+                            <span className="w-8 h-1 mt-1 bg-blue-600 rounded-t"></span>
                         )}
                     </button>
                 );
