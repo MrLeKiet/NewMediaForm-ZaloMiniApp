@@ -36,11 +36,10 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
 
     return (
         <>
-            {/* Trigger button */}
             <button
                 type="button"
                 className={`w-full input-wrapper border-transparent flex items-center justify-between`}
-                style={{ paddingLeft: "4px", paddingRight: "0" }}
+                style={{ paddingLeft: "4px", paddingRight: "0", position: "relative", zIndex: 51 }}
                 onClick={handleOpen}
                 tabIndex={0}
                 aria-haspopup="listbox"
@@ -61,7 +60,6 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                 </span>
             </button>
 
-            {/* Overlay */}
             <button
                 type="button"
                 className={`fixed inset-0 z-40 bg-black/30 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -78,7 +76,6 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                 style={{ padding: 0, border: "none", background: "transparent" }}
             />
 
-            {/* Bottom sheet */}
             <div
                 className={`fixed left-0 right-0 bottom-0 z-50 transform transition-transform duration-300 ${open ? "translate-y-0" : "translate-y-full"
                     }`}
@@ -91,7 +88,6 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                         </button>
                     </div>
 
-                    {/* Search input */}
                     <input
                         type="text"
                         className="w-full mb-3 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring"
@@ -99,8 +95,6 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
-
-                    {/* Options list */}
                     <ul className="space-y-1 overflow-y-auto flex-1">
                         {options
                             .filter((option) =>
@@ -130,7 +124,6 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                             })}
                     </ul>
 
-                    {/* Confirm button */}
                     <button
                         className="btn-blue w-full mt-4 py-2"
                         onClick={handleConfirm}

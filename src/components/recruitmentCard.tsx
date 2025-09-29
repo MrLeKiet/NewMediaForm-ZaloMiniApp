@@ -28,7 +28,6 @@ const RecruitmentCard: React.FC<RecruitmentCardProps> = ({ id, title, thumbnail,
 			>
 				<div className="flex flex-col gap-1">
 					<div className="flex gap-3 items-start">
-						{/* Logo / Thumbnail */}
 						<div className="flex-shrink-0 w-14 h-14 rounded overflow-hidden bg-white border border-gray-200 flex items-center justify-center">
 							<img
 								src={thumbnail}
@@ -41,7 +40,6 @@ const RecruitmentCard: React.FC<RecruitmentCardProps> = ({ id, title, thumbnail,
 							/>
 						</div>
 
-						{/* Title and company */}
 						<div className="flex-1 min-w-0 gap-1">
 							<div className="font-semibold text-[16px] text-gray-900 line-clamp-2">
 								{title}

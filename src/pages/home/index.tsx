@@ -1,10 +1,10 @@
 
 import InputBox from "@/components/InputBox";
 import SingleSelect from "@/components/SingleSelect";
-import React, { useEffect, useRef, useState } from "react";
-import { Page } from "zmp-ui";
-import Navbar from "../../components/NavBar";
 import { Bell } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Page, useNavigate } from "zmp-ui";
+import Navbar from "../../components/NavBar";
 
 
 
@@ -13,7 +13,6 @@ function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderInterval = useRef<number | null>(null);
   const isSwiping = useRef(false);
-  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchDeltaX = useRef<number>(0);
 
@@ -71,11 +70,11 @@ function HomePage() {
   };
 
   return (
-    <Page className="bg-white min-h-screen">
+    <Page className="bg-white min-h-screen" style={{ paddingBottom: 'calc(20px + var(--navbar-height))' }}>
       <div className="bg-yellow-400 text-white px-4 flex items-center justify-between" style={{ paddingTop: 'var(--safe-top)'}}>
-        <div className="text-lg font-bold">KESC</div>
+        <div className="text-lg font-bold" style={{ paddingBottom: 'var(--safe-top)' }}>KESC</div>
       </div>
-      <div className="flex flex-col gap-4" style={{ paddingBottom: 'var(--safe-bottom)' }}>
+      <div className="flex flex-col gap-4" >
         {sliderImages.length > 0 && (
           <div className="w-full bg-white flex justify-center items-center">
             <div
@@ -149,6 +148,8 @@ function HomePage() {
 
 function JobListSection() {
   const [jobs, setJobs] = useState<any[]>([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_BASE_URL}/UrgentJobRecruitment?rowIndex=0&pageSize=5`, {
       headers: {
@@ -162,12 +163,33 @@ function JobListSection() {
       });
   }, []);
 
+  const handleClick = (job: any) => {
+    const id = job.id || job.jodId || job.jobId;
+    console.log("JobListSection click, id:", id, job);
+    if (id) {
+      navigate(`/jobsdetail/${id}`);
+    } else {
+      alert("Không tìm thấy id công việc!");
+    }
+  };
+
   return (
     <div className="px-4 rounded-lg">
       <div className="text-lg font-bold mb-1">VIỆC LÀM MỚI NHẤT</div>
       <div className="flex flex-col gap-2">
         {jobs.map((job) => (
-          <div key={job.id} className="flex gap-3 items-center bg-white/5 rounded p-2">
+          <button
+            key={job.id || job.jodId || job.jobId}
+            className="flex gap-3 items-center bg-white/5 rounded p-2 w-full text-left cursor-pointer hover:bg-white/10"
+            onClick={() => handleClick(job)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                handleClick(job);
+              }
+            }}
+            tabIndex={0}
+            type="button"
+          >
             {job.thumbnail && (
               <img
                 src={job.thumbnail}
@@ -180,7 +202,7 @@ function JobListSection() {
               <div className="text-xs">Khu vực: {job.location || "Chưa cập nhật"}</div>
               <div className="text-xs">Mức lương: {job.salary || "Thỏa thuận"}</div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>
@@ -203,7 +225,7 @@ function LaboreSection() {
   }, []);
 
   return (
-    <div className="px-4 rounded-lg pb-20">
+    <div className="px-4 rounded-lg">
       <div className="text-lg font-bold mb-1">ỨNG VIÊN MỚI NHẤT</div>
       <div className="flex flex-col gap-2">
         {jobs.map((job) => (
@@ -231,6 +253,7 @@ function LaboreSection() {
 
 function HotNewsSection() {
   const [news, setNews] = useState<any[]>([]);
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_BASE_URL}/HotNewsHomePage?rowIndex=0&pageSize=5`, {
       headers: {
@@ -244,14 +267,16 @@ function HotNewsSection() {
       });
   }, []);
 
-  // Helper to format date as DD/MM/YYYY
   function formatDate(dateStr: string) {
-    // Accepts DD/MM/YYYY or DD/MM/YY
     const parts = dateStr.split("/");
     if (parts.length === 3) {
       return `${parts[0]}/${parts[1]}/${parts[2]}`;
     }
     return dateStr;
+  }
+
+  function handleNewsClick(id: string) {
+    navigate(`/news/${id}`);
   }
 
   return (
@@ -261,11 +286,27 @@ function HotNewsSection() {
           <Bell className="w-5 h-5" />{" "}
           THÔNG BÁO MỚI NHẤT
         </div>
-        <button className="bg-white text-xs px-3 py-1 font-semibold">Xem tất cả &gt;</button>
+        <button
+          className="bg-white text-xs px-3 py-1 font-semibold"
+          onClick={() => navigate("/news")}
+        >
+          Xem tất cả &gt;
+        </button>
       </div>
       <div className="flex flex-col gap-2">
         {news.map((item) => (
-          <div key={item.id} className="flex gap-3 items-center bg-white/5 rounded p-2">
+          <button
+            key={item.id}
+            type="button"
+            className="flex gap-3 items-center bg-white/5 rounded p-2 cursor-pointer hover:bg-white/10 w-full text-left"
+            onClick={() => handleNewsClick(item.id)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                handleNewsClick(item.id);
+              }
+            }}
+            tabIndex={0}
+          >
             <div className="flex flex-col items-center justify-center min-w-[60px]">
               <div className="bg-[#1565C0] text-white text-xs font-bold rounded px-2 py-1 mb-1 text-center">
                 {item.publishdate
@@ -286,9 +327,21 @@ function HotNewsSection() {
               </div>
             </div>
             <div className="flex-1">
-              <div className=" font-semibold leading-tight mb-1" style={{ wordBreak: 'break-word' }}>{item.title}</div>
+              <div
+                className="font-semibold leading-tight mb-1"
+                style={{
+                  wordBreak: 'break-word',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 4,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {item.title}
+              </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>

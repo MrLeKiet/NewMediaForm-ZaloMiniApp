@@ -1,7 +1,6 @@
 
 import { Page } from "zmp-ui";
 import Navbar from "../../components/NavBar";
-import RegisterPage from "../register";
 import { User } from "lucide-react";
 function ProfilePage() {
     return (

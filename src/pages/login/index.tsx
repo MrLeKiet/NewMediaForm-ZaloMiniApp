@@ -28,7 +28,6 @@ const LoginPage: React.FC = () => {
     return (
         <Page className="bg-gray-100 p-4 min-h-screen" style={{ paddingTop: 'var(--safe-top)', paddingBottom: 'var(--safe-bottom)' }}>
             <Box className="card-section">
-                {/* Title */}
                 <Box className="flex justify-center mb-6 sm:mb-8">
                     <Box className="flex items-center space-x-2">
                         <Text size="large" className="text-blue-500">🔑</Text>
@@ -37,7 +36,6 @@ const LoginPage: React.FC = () => {
                         </Text.Header>
                     </Box>
                 </Box>
-                {/* Form */}
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <Box className="space-y-4 lg:col-span-2">
                         <InputBox
@@ -73,7 +71,6 @@ const LoginPage: React.FC = () => {
                         </InputBox>
                         {error && <Text className="text-red-500 text-sm mb-2">{error}</Text>}
                     </Box>
-                    {/* Bottom: Note + Buttons */}
                     <Box className="lg:col-span-2 mt-6 sm:mt-8 flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0 lg:space-x-4">
                         <Text className="text-sm text-gray-500">
                             (*) Vui lòng nhập đầy đủ thông tin

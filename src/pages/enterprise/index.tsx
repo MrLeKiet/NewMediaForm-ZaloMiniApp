@@ -85,7 +85,7 @@ function EnterprisePage() {
                                     />
                                 </div>
                             </div>
-                            {/* Filter bar under search bar */}
+                            
                             <div className="mt-2 rounded-xl shadow bg-white px-2 py-1">
                                 <FilterBar
                                     options={FilterOptions}

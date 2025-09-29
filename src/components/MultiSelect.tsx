@@ -58,7 +58,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
     return (
         <>
-            {/* Trigger button */}
             <button
                 type="button"
                 className="w-full input-wrapper border-transparent flex items-center justify-between"
@@ -88,7 +87,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 </span>
             </button>
 
-            {/* Overlay */}
             <button
                 type="button"
                 aria-label="Đóng bộ chọn"
@@ -104,7 +102,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 style={{ cursor: "pointer" }}
             />
 
-            {/* Bottom sheet */}
             <div
                 className={`fixed left-0 right-0 bottom-0 z-50 transform transition-transform duration-300 ${open ? "translate-y-0" : "translate-y-full"}`}
             >
@@ -118,7 +115,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                         </button>
                     </div>
 
-                    {/* Search input */}
                     <input
                         type="text"
                         className="w-full mb-3 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring"
@@ -127,7 +123,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                         onChange={(e) => setSearch(e.target.value)}
                     />
 
-                    {/* Options list */}
                     <ul className="space-y-1 overflow-y-auto flex-1">
                         {options
                             .filter((option) =>
@@ -162,7 +157,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                             })}
                     </ul>
 
-                    {/* Confirm button */}
                     <button
                         className="btn-blue w-full mt-4 py-2"
                         onClick={handleConfirm}

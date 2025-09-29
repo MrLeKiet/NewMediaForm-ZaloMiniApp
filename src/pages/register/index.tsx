@@ -18,7 +18,6 @@ import {
     Button,
     DatePicker,
     Input,
-    Page,
     Text,
     useNavigate
 } from "zmp-ui";
@@ -526,7 +525,6 @@ const RegisterPage: React.FC = () => {
         // <Page className="bg-gray-100 p-4 min-h-screen" style={{ paddingTop: 'var(--safe-top)', paddingBottom: 'var(--safe-bottom)' }}>
         <Box className="mb-12">
             <Box className="card-section ">
-                {/* Title */}
                 <Box className="flex justify-center mb-6 sm:mb-8">
                     <Box className="flex items-center space-x-2">
                         <Text size="large" className="text-blue-500">🔍</Text>
@@ -534,12 +532,10 @@ const RegisterPage: React.FC = () => {
                     </Box>
                 </Box>
 
-                {/* Form */}
                 <form
                     onSubmit={handleSubmit}
                     className="grid grid-cols-1 lg:grid-cols-2 gap-6"
                 >
-                    {/* LoginInfoSection removed as requested */}
                     <PersonalInfoSection
                         formData={formData}
                         touched={touched}
@@ -549,7 +545,6 @@ const RegisterPage: React.FC = () => {
                         handleDateChange={handleDateChange}
                         settings={settings}
                     />
-                    {/* Bottom: Note + Buttons */}
                     <Box className="lg:col-span-4 mt-6 sm:mt-8 flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0 lg:space-x-4">
                         <Text className="text-sm text-gray-500">(*) Vui lòng nhập đầy đủ thông tin</Text>
                         {message && (
@@ -567,7 +562,6 @@ const RegisterPage: React.FC = () => {
                                 {loading ? "Đang gửi..." : "Đăng Ký Ngay"}
                             </Button>
                             <Button className="btn-sky">Đăng Ký Cho Nhà Tuyển Dụng</Button>
-                            {/* Login button removed, no login page anymore */}
                         </div>
                     </Box>
                 </form>

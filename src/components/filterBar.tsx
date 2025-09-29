@@ -33,7 +33,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
 
     return (
         <>
-            {/* Trigger button */}
             <button
                 type="button"
                 className={`w-full flex items-center justify-between px-1 py-1 border-transparent text-base font-medium transition focus:outline-none `}
@@ -56,8 +55,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
                     <ChevronDown size={18} />
                 </span>
             </button>
-
-            {/* Overlay */}
             <button
                 type="button"
                 aria-label="Đóng menu lựa chọn"
@@ -73,8 +70,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
                 }}
                 style={{ border: "none", padding: 0, margin: 0 }}
             />
-
-            {/* Bottom sheet */}
             <div
                 className={`fixed left-0 right-0 bottom-0 z-50 transform transition-transform duration-300 ${open ? "translate-y-0" : "translate-y-full"
                     }`}
@@ -87,8 +82,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
                                 &times;
                             </button>
                         </div>
-
-                        {/* Search input */}
                         <input
                             type="text"
                             className="w-full mb-3 px-3 py-2 border-gray-300 border-2 rounded focus:outline-none focus:ring"
@@ -96,8 +89,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
-
-                        {/* Options list */}
                         <ul className="space-y-1 overflow-y-auto h-[25vh]">
                             {options
                                 .filter((option) =>
