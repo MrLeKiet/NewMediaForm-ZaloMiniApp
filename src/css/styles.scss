@@ -1,0 +1,62 @@
+:root {
+    --color-primary: #1565C0;
+    --color-secondary: #FFA726;
+    --color-danger: #E53935;
+    --color-success: #43A047;
+    --color-text: #222;
+    --color-muted: #888;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 32px;
+}
+
+.text-primary {
+    color: var(--color-primary) !important;
+}
+
+.text-secondary {
+    color: var(--color-secondary) !important;
+}
+
+.text-danger {
+    color: var(--color-danger) !important;
+}
+
+.text-success {
+    color: var(--color-success) !important;
+}
+
+.text-muted {
+    color: var(--color-muted) !important;
+}
+
+.text-base {
+    color: var(--color-text) !important;
+}
+
+.font-xs {
+    font-size: var(--font-size-xs) !important;
+}
+
+.font-sm {
+    font-size: var(--font-size-sm) !important;
+}
+
+.font-base {
+    font-size: var(--font-size-base) !important;
+}
+
+.font-lg {
+    font-size: var(--font-size-lg) !important;
+}
+
+.font-xl {
+    font-size: var(--font-size-xl) !important;
+}
+
+.font-2xl {
+    font-size: var(--font-size-2xl) !important;
+}
