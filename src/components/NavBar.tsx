@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
     return (
         <nav
             className="fixed bottom-0 left-0 right-0 bg-white shadow z-50 border-t"
-            style={{ paddingBottom: 'var(--safe-bottom)' }}
+            style={{ paddingBottom: 'var(--safe-bottom)', paddingTop: 'var(--safe-bottom)' }}
         >
             <div ref={navRef} className="max-w-screen-xl mx-auto flex justify-around items-center h-12 xs:h-14 sm:h-16 px-1 xs:px-2 sm:px-4">
                 {NAV_ITEMS.map((item) => {

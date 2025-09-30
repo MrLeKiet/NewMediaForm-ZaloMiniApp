@@ -8,15 +8,14 @@ import {
 } from "zmp-ui";
 import { AppProps } from "zmp-ui/app";
 
-import JobDetailPage from "@/pages/detail";
-import EnterprisePage from "@/pages/enterprise";
-import HomePage from "@/pages/home";
-import LoginPage from "@/pages/login";
-import NewsPage from "@/pages/news";
-import ProfilePage from "@/pages/profile";
-import RegisterPage from "@/pages/register";
-import NewsDetailPage from "@/pages/news/newsdetail";
-import JobsDetailPage from "@/pages/jobsdetails";
+import JobDetailPage from "@/pages/RecruitmentForeignersJobDetail";
+import EnterprisePage from "@/pages/RecruitmentForeigners";
+import HomePage from "@/pages/Home";
+import NewsPage from "@/pages/HotNewsHomePage";
+import ProfilePage from "@/pages/Profile";
+import RegisterPage from "@/pages/Register";
+import NewsDetailPage from "@/pages/NewDetail";
+import JobsDetailPage from "@/pages/JobDetails";
 const Layout = () => {
   return (
     <App theme={getSystemInfo().zaloTheme as AppProps["theme"]}>
@@ -32,7 +31,6 @@ const Layout = () => {
             <Route path="/enterprise" element={<EnterprisePage />} />
             <Route path="/detail/:id" element={<JobDetailPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
           </AnimationRoutes>
         </ZMPRouter>
       </SnackbarProvider>

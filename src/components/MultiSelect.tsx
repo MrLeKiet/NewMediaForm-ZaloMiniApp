@@ -13,6 +13,8 @@ export type MultiSelectProps = {
     onChange: (selected: string[]) => void;
     max?: number;
     placeholder?: string;
+    onOpen?: () => void;
+    onClose?: () => void;
 };
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -21,6 +23,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     onChange,
     max = 2,
     placeholder,
+    onOpen,
+    onClose,
 }) => {
     const [open, setOpen] = React.useState(false);
     const [internal, setInternal] = React.useState<string[]>(value || []); // committed
@@ -35,8 +39,12 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     const handleOpen = () => {
         setPendingInternal(internal);
         setOpen(true);
+        if (typeof onOpen === 'function') onOpen();
     };
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        if (typeof onClose === 'function') onClose();
+    };
 
     const handleSelect = (optionValue: string) => {
         let next: string[];
@@ -56,12 +64,12 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         setOpen(false);
     };
 
+    // --- Refactored to match FilterBar structure ---
     return (
         <>
             <button
                 type="button"
-                className="w-full input-wrapper border-transparent flex items-center justify-between"
-                style={{ paddingLeft: "4px", paddingRight: "0" }}
+                className={`w-full flex items-center justify-between px-1 py-1 border-transparent text-base font-medium transition focus:outline-none`}
                 onClick={handleOpen}
                 tabIndex={0}
                 aria-haspopup="listbox"
@@ -86,10 +94,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                     <ChevronDown size={18} />
                 </span>
             </button>
-
             <button
                 type="button"
-                aria-label="Đóng bộ chọn"
+                aria-label="Đóng menu lựa chọn"
                 tabIndex={open ? 0 : -1}
                 className={`fixed inset-0 z-40 bg-black/30 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
                 onClick={handleClose}
@@ -99,64 +106,63 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                         handleClose();
                     }
                 }}
-                style={{ cursor: "pointer" }}
+                style={{ border: "none", padding: 0, margin: 0 }}
             />
-
             <div
                 className={`fixed left-0 right-0 bottom-0 z-50 transform transition-transform duration-300 ${open ? "translate-y-0" : "translate-y-full"}`}
             >
-                <div className="bg-white rounded-t-2xl shadow-lg p-4 h-[60vh] flex flex-col">
-                    <div className="flex justify-between items-center mb-4">
-                        <span className="font-semibold">
-                            Chọn ngành nghề (tối đa {max})
-                        </span>
-                        <button onClick={handleClose} className="text-2xl leading-none">
-                            &times;
-                        </button>
+                <div className="bg-white rounded-t-2xl shadow-lg p-4 h-[55vh] justify-between flex flex-col">
+                    <div>
+                        <div className="flex justify-between items-center mb-4">
+                            <span className="font-semibold">Chọn ngành nghề (tối đa {max})</span>
+                            <button onClick={handleClose} className="text-2xl leading-none">
+                                &times;
+                            </button>
+                        </div>
+                        <input
+                            type="text"
+                            className="w-full mb-3 px-3 py-2 border-gray-300 border-2 rounded focus:outline-none focus:ring"
+                            placeholder="Tìm kiếm..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                        <ul className="space-y-1 overflow-y-auto h-[25vh]">
+                            {options
+                                .filter((option) =>
+                                    typeof option.label === "string" &&
+                                    option.label.toLowerCase().includes(search.toLowerCase())
+                                )
+                                .map((option) => {
+                                    const isSelected = pendingInternal.includes(option.value);
+                                    const isDisabled = !isSelected && pendingInternal.length >= max;
+                                    return (
+                                        <button
+                                            type="button"
+                                            key={option.value}
+                                            className={`w-full text-left py-3 px-2 rounded flex items-center justify-between gap-4 transition-colors ${isSelected
+                                                ? "text-blue-600 font-semibold bg-blue-50"
+                                                : "cursor-pointer hover:bg-gray-100"
+                                                } ${isDisabled
+                                                    ? "text-gray-400 bg-gray-100 cursor-not-allowed"
+                                                    : ""}`}
+                                            onClick={() => !isDisabled && handleSelect(option.value)}
+                                            disabled={isDisabled}
+                                            tabIndex={0}
+                                        >
+                                            <span className="flex-1">{option.label}</span>
+                                            {isSelected ? (
+                                                <SquareCheck
+                                                    size={20}
+                                                    className="text-blue-600 ml-2"
+                                                />
+                                            ) : (
+                                                <Square size={20} className="text-gray-400 ml-2" />
+                                            )}
+                                        </button>
+                                    );
+                                })}
+                        </ul>
                     </div>
-
-                    <input
-                        type="text"
-                        className="w-full mb-3 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring"
-                        placeholder="Tìm kiếm..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
-
-                    <ul className="space-y-1 overflow-y-auto flex-1">
-                        {options
-                            .filter((option) =>
-                                option.label.toLowerCase().includes(search.toLowerCase())
-                            )
-                            .map((option) => {
-                                const isSelected = pendingInternal.includes(option.value);
-                                const isDisabled = !isSelected && pendingInternal.length >= max;
-
-                                return (
-                                    <button
-                                        type="button"
-                                        key={option.value}
-                                        className={`w-full text-left py-3 px-2 rounded flex items-center justify-between gap-4 transition-colors ${isSelected
-                                            ? "text-blue-600 font-semibold bg-blue-50"
-                                            : "hover:bg-gray-100"
-                                            } ${isDisabled
-                                                ? "text-gray-400 bg-gray-100 cursor-not-allowed"
-                                                : "cursor-pointer"
-                                            }`}
-                                        onClick={() => !isDisabled && handleSelect(option.value)}
-                                        disabled={isDisabled}
-                                    >
-                                        <span className="flex-1">{option.label}</span>
-                                        {isSelected ? (
-                                            <SquareCheck size={20} className="text-blue-600 ml-2" />
-                                        ) : (
-                                            <Square size={20} className="text-gray-400 ml-2" />
-                                        )}
-                                    </button>
-                                );
-                            })}
-                    </ul>
-
                     <button
                         className="btn-blue w-full mt-4 py-2"
                         onClick={handleConfirm}
