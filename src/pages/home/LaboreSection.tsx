@@ -6,7 +6,7 @@ const LaboreSection: React.FC = () => {
     const { labores, loading, error } = useLabore();
 
     if (loading) return (
-        <div className="px-4 rounded-lg">
+        <div >
             <div className="font-lg font-bold mb-1 text-primary">ỨNG VIÊN MỚI NHẤT</div>
             <div className="flex flex-col gap-2">
                 {Array.from({ length: 3 }).map((_, i) => {
@@ -28,7 +28,7 @@ const LaboreSection: React.FC = () => {
     if (error) return <div>Lỗi: {String(error)}</div>;
     const isEmpty = !Array.isArray(labores) || labores.length === 0;
     return (
-        <div className="px-4 rounded-lg">
+        <div>
             <div className="font-lg font-bold mb-1 text-primary">ỨNG VIÊN MỚI NHẤT</div>
             <div className="flex flex-col gap-2">
                 {isEmpty ? (

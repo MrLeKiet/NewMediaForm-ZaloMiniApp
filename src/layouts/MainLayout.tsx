@@ -37,15 +37,19 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const path = location.pathname;
     const [showNavbar, setShowNavbar] = React.useState(true);
 
+    const navbarContextValue = React.useMemo(
+        () => ({ showNavbar, setShowNavbar }),
+        [showNavbar, setShowNavbar]
+    );
+
     if (!MAIN_ROUTES.includes(path) && !RETURN_ROUTES.includes(path)) {
-        // No layout for routes not listed
         return <>{children}</>;
     }
 
     const isMain = MAIN_ROUTES.includes(path);
 
     return (
-        <NavbarVisibilityContext.Provider value={{ showNavbar, setShowNavbar }}>
+        <NavbarVisibilityContext.Provider value={navbarContextValue}>
             <div className="min-h-screen flex flex-col" style={{ padding: 0 }}>
                 <div style={{ position: "sticky", top: 0, zIndex: 50 }}>
                     {isMain ? <Header /> : <ReturnHeader />}

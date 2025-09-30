@@ -2,13 +2,9 @@ import InputBox from "@/components/InputBox";
 import SingleSelect from "@/components/SingleSelect";
 import React from "react";
 
-type HomeFiltersProps = {
-    setShowNavbar: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const HomeFilters: React.FC<HomeFiltersProps> = ({ setShowNavbar }) => {
+const HomeFilters: React.FC = () => {
     return (
-        <div className="px-4 flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
             <input type="text" placeholder="Nhập vị trí muốn tìm việc" className="border rounded px-3 py-2 w-full" />
             <div className="gap-1">
                 <InputBox label="" icon={<span className="text-gray-400"></span>}>
@@ -22,8 +18,6 @@ const HomeFilters: React.FC<HomeFiltersProps> = ({ setShowNavbar }) => {
                         value={""}
                         placeholder="Chọn ngành nghề"
                         onChange={() => { }}
-                        onOpen={() => setShowNavbar(false)}
-                        onClose={() => setShowNavbar(true)}
                     />
                 </InputBox>
                 <InputBox label="" icon={<span className="text-gray-400"></span>}>
@@ -37,8 +31,6 @@ const HomeFilters: React.FC<HomeFiltersProps> = ({ setShowNavbar }) => {
                         value={""}
                         placeholder="Chọn mức lương"
                         onChange={() => { }}
-                        onOpen={() => setShowNavbar(false)}
-                        onClose={() => setShowNavbar(true)}
                     />
                 </InputBox>
             </div>

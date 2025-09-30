@@ -3,8 +3,7 @@
 
 
 
-import React from "react";
-import MainLayout from "@/components/MainLayout";
+import MainLayout from "@/layouts/MainLayout";
 import HomeFilters from "./HomeFilters";
 import HomeSlider from "./HomeSlider";
 import HotNewsSection from "./HotNewsSection";
@@ -12,13 +11,12 @@ import JobListSection from "./JobListSection";
 import LaboreSection from "./LaboreSection";
 
 
+
 const HomePage = () => {
-  const [showNavbar, setShowNavbar] = React.useState(true);
-  const [showHeader] = React.useState(true);
   return (
-    <MainLayout showNavbar={showNavbar} showHeader={showHeader}>
+    <MainLayout>
       <HomeSlider />
-      <HomeFilters setShowNavbar={setShowNavbar} />
+      <HomeFilters />
       <HotNewsSection />
       <JobListSection />
       <LaboreSection />
