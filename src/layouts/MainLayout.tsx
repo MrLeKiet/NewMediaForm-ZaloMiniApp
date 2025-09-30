@@ -13,7 +13,7 @@ const MAIN_ROUTES = [
     "/enterprise"
 ];
 const RETURN_ROUTES = [
-    "/jobdetails",
+    "/jobsdetail",
     "/register",
     "/auth",
     "/profile/edit"
@@ -42,24 +42,24 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         [showNavbar, setShowNavbar]
     );
 
-    if (!MAIN_ROUTES.includes(path) && !RETURN_ROUTES.includes(path)) {
+    const isReturn = RETURN_ROUTES.some(route => path.startsWith(route));
+    const isMain = !isReturn && MAIN_ROUTES.some(route => path.startsWith(route));
+    if (!isMain && !isReturn) {
         return <>{children}</>;
     }
-
-    const isMain = MAIN_ROUTES.includes(path);
 
     return (
         <NavbarVisibilityContext.Provider value={navbarContextValue}>
             <div className="min-h-screen flex flex-col" style={{ padding: 0 }}>
                 <div style={{ position: "sticky", top: 0, zIndex: 50 }}>
-                    {isMain ? <Header /> : <ReturnHeader />}
+                    {isReturn ? <ReturnHeader /> : <Header />}
                 </div>
                 <div
-                    className="flex-1 flex flex-col px-1 pb-1 gap-4 overflow-y-auto"
+                    className="flex-1 flex flex-col px-3 pb-1 gap-4 overflow-y-auto"
                     style={{
-                        maxHeight: isMain
-                            ? "calc(100vh - var(--safe-top) - var(--navbar-height) - var(--header-height) + 10px)"
-                            : "calc(100vh - var(--safe-top) - var(--return-header-height) + 10px)",
+                        maxHeight: isReturn
+                            ? "calc(100vh - var(--safe-top) - var(--return-header-height) + 10px)"
+                            : "calc(100vh - var(--safe-top) - var(--navbar-height) - var(--header-height) + 10px)",
                     }}
                 >
                     {children}
