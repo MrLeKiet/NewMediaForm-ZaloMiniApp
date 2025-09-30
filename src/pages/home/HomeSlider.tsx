@@ -119,7 +119,7 @@ const HomeSlider: React.FC = () => {
     if (sliderImages.length === 0) return null;
 
     return (
-        <div className="w-full bg-white flex justify-center items-center">
+        <div className="w-full flex justify-center items-center">
             <div
                 className="relative w-full max-w-md h-48 overflow-hidden rounded-lg"
                 onTouchStart={handleImgTouchStart}

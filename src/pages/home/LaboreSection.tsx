@@ -7,7 +7,7 @@ const LaboreSection: React.FC = () => {
 
     if (loading) return (
         <div className="px-4 rounded-lg">
-            <div className="text-lg font-bold mb-1">ỨNG VIÊN MỚI NHẤT</div>
+            <div className="font-lg font-bold mb-1 text-primary">ỨNG VIÊN MỚI NHẤT</div>
             <div className="flex flex-col gap-2">
                 {Array.from({ length: 3 }).map((_, i) => {
                     const uniqueKey = `skeleton-${Date.now()}-${i}`;
@@ -29,10 +29,10 @@ const LaboreSection: React.FC = () => {
     const isEmpty = !Array.isArray(labores) || labores.length === 0;
     return (
         <div className="px-4 rounded-lg">
-            <div className="text-lg font-bold mb-1">ỨNG VIÊN MỚI NHẤT</div>
+            <div className="font-lg font-bold mb-1 text-primary">ỨNG VIÊN MỚI NHẤT</div>
             <div className="flex flex-col gap-2">
                 {isEmpty ? (
-                    <div className="text-center text-gray-400 py-8 select-none">
+                    <div className="text-center text-muted py-8 select-none font-lg">
                         Không có ứng viên nào được tìm thấy.
                     </div>
                 ) : (
@@ -46,11 +46,11 @@ const LaboreSection: React.FC = () => {
                             />
                         )}
                         <div className="flex-1">
-                            <div className="font-semibold leading-tight mb-1" style={{ wordBreak: 'break-word' }}>{labore.fullname}</div>
-                            <div className="text-xs">
+                            <div className="font-semibold leading-tight mb-1 font-base" style={{ wordBreak: 'break-word' }}>{labore.fullname}</div>
+                            <div className="font-xs">
                                 Ngành nghề: {Array.isArray(labore.labore) ? labore.labore.join(", ") : (labore.labore || "Chưa cập nhật")}
                             </div>
-                            <div className="text-xs">Nơi làm việc: {labore.location || "Thỏa thuận"}</div>
+                            <div className="font-xs">Nơi làm việc: {labore.location || "Thỏa thuận"}</div>
                         </div>
                     </div>
                 ))

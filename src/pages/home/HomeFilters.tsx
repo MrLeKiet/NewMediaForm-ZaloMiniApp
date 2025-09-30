@@ -8,7 +8,7 @@ type HomeFiltersProps = {
 
 const HomeFilters: React.FC<HomeFiltersProps> = ({ setShowNavbar }) => {
     return (
-        <div className="bg-white px-4 flex flex-col gap-2">
+        <div className="px-4 flex flex-col gap-2">
             <input type="text" placeholder="Nhập vị trí muốn tìm việc" className="border rounded px-3 py-2 w-full" />
             <div className="gap-1">
                 <InputBox label="" icon={<span className="text-gray-400"></span>}>

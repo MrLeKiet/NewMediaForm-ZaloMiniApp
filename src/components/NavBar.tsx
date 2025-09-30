@@ -12,9 +12,8 @@ const NAV_ITEMS = [
 const Navbar: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const currentPath = location.pathname || "/home"; // Default to "/home" if pathname is falsy
+    const currentPath = location.pathname || "/home";
 
-    // Dynamic navbar height using ref and CSS variable
     const navRef = React.useRef<HTMLDivElement>(null);
     React.useEffect(() => {
         if (navRef.current) {

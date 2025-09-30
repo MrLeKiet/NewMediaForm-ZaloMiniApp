@@ -10,11 +10,11 @@ const HotNewsSection: React.FC = () => {
     if (loading) return (
         <div className="px-4 rounded-lg">
             <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap text-lg font-bold">
+                <div className="flex items-center gap text-primary font-base font-bold">
                     <Bell className="w-5 h-5" /> THÔNG BÁO MỚI NHẤT
                 </div>
                 <button
-                    className="bg-white text-xs px-3 py-1 font-semibold"
+                    className="text-xs px-3 py-1 font-semibold text-primary"
                     onClick={() => navigate("/news")}
                 >
                     Xem tất cả &gt;
@@ -53,12 +53,11 @@ const HotNewsSection: React.FC = () => {
     return (
         <div className="px-4  rounded-lg">
             <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap text-lg font-bold">
-                    <Bell className="w-5 h-5" />{" "}
+                <div className="flex items-center gap text-primary font-lg font-bold">
                     THÔNG BÁO MỚI NHẤT
                 </div>
                 <button
-                    className="bg-white text-xs px-3 py-1 font-semibold"
+                    className="bg-white text-xs px-3 py-1 font-semibold text-primary"
                     onClick={() => navigate("/news")}
                 >
                     Xem tất cả &gt;
@@ -66,7 +65,7 @@ const HotNewsSection: React.FC = () => {
             </div>
             <div className="flex flex-col gap-2">
                 {isEmpty ? (
-                    <div className="text-center text-gray-400 py-8 select-none">
+                    <div className="text-center text-muted py-8 select-none font-lg">
                         Không có tin tức nào được tìm thấy.
                     </div>
                 ) : (
@@ -84,7 +83,7 @@ const HotNewsSection: React.FC = () => {
                         tabIndex={0}
                     >
                         <div className="flex flex-col items-center justify-center min-w-[60px]">
-                            <div className="bg-[#1565C0] text-white text-xs font-bold rounded px-2 py-1 mb-1 text-center">
+                            <div className="bg-[#1565C0] text-white font-xs font-bold rounded px-2 py-1 mb-1 text-center">
                                 {item.publishdate
                                     ? (() => {
                                         const parts = formatDate(item.publishdate).split("/");
@@ -104,7 +103,7 @@ const HotNewsSection: React.FC = () => {
                         </div>
                         <div className="flex-1">
                             <div
-                                className="font-semibold leading-tight mb-1"
+                                className="font-semibold leading-tight mb-1 font-base"
                                 style={{
                                     wordBreak: 'break-word',
                                     display: '-webkit-box',
