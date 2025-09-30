@@ -1,3 +1,4 @@
+import { NavbarVisibilityContext } from "@/layouts/MainLayout";
 import { ChevronDown, Square, SquareCheck, Tally1 } from "lucide-react";
 import React from "react";
 
@@ -21,6 +22,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
     const [open, setOpen] = React.useState(false);
     const [internal, setInternal] = React.useState(value || "");
     const [search, setSearch] = React.useState("");
+    const navbarCtx = React.useContext(NavbarVisibilityContext);
 
     React.useEffect(() => {
         setInternal(value || "");
@@ -28,10 +30,12 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
 
     const handleOpen = () => {
         setOpen(true);
+        if (navbarCtx) navbarCtx.setShowNavbar(false);
         if (typeof onOpen === 'function') onOpen();
     };
     const handleClose = () => {
         setOpen(false);
+        if (navbarCtx) navbarCtx.setShowNavbar(true);
         if (typeof onClose === 'function') onClose();
     };
 

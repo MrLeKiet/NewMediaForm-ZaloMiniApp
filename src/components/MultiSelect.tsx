@@ -1,4 +1,5 @@
 
+import { NavbarVisibilityContext } from "@/layouts/MainLayout";
 import { ChevronDown, Square, SquareCheck, Tally1 } from "lucide-react";
 import React from "react";
 
@@ -30,6 +31,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     const [internal, setInternal] = React.useState<string[]>(value || []); // committed
     const [pendingInternal, setPendingInternal] = React.useState<string[]>(value || []); // temporary while modal open
     const [search, setSearch] = React.useState("");
+    const navbarCtx = React.useContext(NavbarVisibilityContext);
 
     React.useEffect(() => {
         setInternal(value || []);
@@ -39,10 +41,12 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     const handleOpen = () => {
         setPendingInternal(internal);
         setOpen(true);
+        if (navbarCtx) navbarCtx.setShowNavbar(false);
         if (typeof onOpen === 'function') onOpen();
     };
     const handleClose = () => {
         setOpen(false);
+        if (navbarCtx) navbarCtx.setShowNavbar(true);
         if (typeof onClose === 'function') onClose();
     };
 
