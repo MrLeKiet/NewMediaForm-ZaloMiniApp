@@ -1,4 +1,4 @@
-import axios from "axios";
+import { getSettings, laboreSignUp, signIn } from "@/api/registerApi";
 import {
     Briefcase,
     Building,
@@ -25,7 +25,7 @@ import {
 import InputBox from "../../components/InputBox";
 import MultiSelect from "../../components/MultiSelect";
 import SingleSelect from "../../components/SingleSelect";
-import { useRegisterForm } from "../../hooks/useRegisterForm";
+import { useRegisterForm } from "../../hooks/useRegister";
 
 const PersonalInfoRow1: React.FC<any> = ({
     formData,
@@ -317,9 +317,6 @@ const PersonalInfoSection: React.FC<any> = (props) => (
     </Box>
 );
 
-
-
-
 const RegisterPage: React.FC = () => {
     const navigate = useNavigate();
     const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -399,13 +396,8 @@ const RegisterPage: React.FC = () => {
     useEffect(() => {
         async function fetchSettings() {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/Settings`, {
-                    headers: {
-                        "Accept": "application/json",
-                        "Accept-Language": "2"
-                    }
-                });
-                setSettings(res.data.Data);
+                const data = await getSettings();
+                setSettings(data);
             } catch (err) {
                 console.error("Error fetching settings:", err);
                 setMessage("Không thể tải dữ liệu settings");
@@ -469,30 +461,15 @@ const RegisterPage: React.FC = () => {
         try {
             const body = buildLaboreSignUpBody(formData);
             console.log("Sending access token:", accessToken);
-            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/LaboreSignUp`, body, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Accept-Language": "2"
-                }
-            });
-            if (res.data.StatusResult?.Code === 0) {
+            const res = await laboreSignUp(body);
+            if (res.StatusResult?.Code === 0) {
                 setMessage("Đăng ký thành công!");
                 try {
-                    const loginRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/SignIn`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Accept": "application/json",
-                            "Accept-Language": "2"
-                        },
-                        body: JSON.stringify({
-                            Accesstoken: accessToken || "",
-                            Code: phoneToken || "",
-                            ZaloId: userID || ""
-                        })
+                    const loginData = await signIn({
+                        Accesstoken: accessToken || "",
+                        Code: phoneToken || "",
+                        ZaloId: userID || ""
                     });
-                    const loginData = await loginRes.json();
                     if (loginData.StatusResult?.Code === 0) {
                         navigate("/home");
                     } else {
