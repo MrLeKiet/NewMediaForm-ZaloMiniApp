@@ -5,7 +5,7 @@ import { useJobDetail } from "./useJobDetails";
 const JobInformation: React.FC = () => {
     const { job, loading, error } = useJobDetail();
     if (loading) return (
-        <div className="border-2 border-orange-500 rounded-lg mb-4">
+        <div className="border-2 rounded-lg mb-4 mx-3">
             <Skeleton className="h-6 w-1/2 mb-2" />
             <div className="p-3 space-y-2">
                 {Array.from({ length: 7 }).map((_, i) => (
@@ -16,8 +16,8 @@ const JobInformation: React.FC = () => {
     );
     if (error || !job) return <div>Error loading job details.</div>;
     return (
-        <div className="border-2 border-orange-500 rounded-lg mb-4">
-            <div className="bg-white text-orange-500 font-bold text-center py-2 border-b border-orange-500">THÔNG TIN CHUNG</div>
+        <div className="border-2 rounded-lg mb-4 mx-3">
+            <div className="bg-white font-bold text-center py-2 border-b">THÔNG TIN CHUNG</div>
             <div className="p-3 text-sm text-gray-800 space-y-2">
                 <div><b>Ngày đăng tin:</b> {job.publishdate}</div>
                 <div><b>Vị trí (mới):</b> {job.location}</div>
