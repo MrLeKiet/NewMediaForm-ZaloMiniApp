@@ -15,8 +15,6 @@ function ProfilePage() {
                     <div className="text-lg font-semibold">Nguyễn Văn A</div>
                 </div>
             </div>
-            
-            <Navbar />
         </Page>
     );
 }
