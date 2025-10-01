@@ -1,9 +1,3 @@
-
-
-
-
-
-import MainLayout from "@/layouts/MainLayout";
 import HomeFilters from "./HomeFilters";
 import HomeSlider from "./HomeSlider";
 import HotNewsSection from "./HotNewsSection";
@@ -14,13 +8,13 @@ import LaboreSection from "./LaboreSection";
 
 const HomePage = () => {
   return (
-    <MainLayout>
+    <div className="flex flex-col gap-4 px-4 pb-4">
       <HomeSlider />
       <HomeFilters />
       <HotNewsSection />
       <JobListSection />
       <LaboreSection />
-    </MainLayout>
+    </div>
   );
 };
 

@@ -1,9 +1,18 @@
+import Skeleton from "@/components/Skeleton";
 import React from "react";
 import { useJobDetail } from "./useJobDetails";
 
 const JobGeneralInfo: React.FC = () => {
     const { job, loading, error } = useJobDetail();
-    if (loading) return <div>Loading...</div>;
+    if (loading) return (
+        <div className="bg-orange-500 rounded-lg p-3 mb-4 text-white shadow flex flex-col gap-1">
+            <Skeleton className="h-6 w-2/3 mb-2" />
+            <Skeleton className="h-4 w-1/2 mb-1" />
+            <Skeleton className="h-4 w-1/3 mb-1" />
+            <Skeleton className="h-4 w-1/4 mb-1" />
+            <Skeleton className="h-4 w-1/4 mb-1" />
+        </div>
+    );
     if (error || !job) return <div>Error loading job details.</div>;
     return (
         <div className="bg-orange-500 rounded-lg p-3 mb-4 text-white shadow flex flex-col gap-1">

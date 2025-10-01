@@ -1,12 +1,11 @@
 
-import MainLayout from "@/layouts/MainLayout";
 import HotNewsSection from "./HotNewsSection";
 
 const HotNewsHomePage = () => {
   return (
-    <MainLayout>
+    <div className="flex flex-col gap-4 px-4 pb-4">
       <HotNewsSection />
-    </MainLayout>
+    </div>
   );
 };
 

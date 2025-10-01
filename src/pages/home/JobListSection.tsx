@@ -1,3 +1,4 @@
+import Card from "@/components/Card";
 import Skeleton from "@/components/Skeleton";
 import { useUrgentJobs } from "@/pages/Home/useHome";
 import React from "react";
@@ -48,40 +49,15 @@ const JobListSection: React.FC = () => {
                     </div>
                 ) : (
                     jobs.map((job) => (
-                        <button
+                        <Card
                             key={job.id || job.jodId || job.jobId}
-                            className="flex gap-3 items-center bg-white/5 rounded p-2 w-full text-left cursor-pointer hover:bg-white/10"
+                            thumbnail={job.thumbnail}
                             onClick={() => handleClick(job)}
-                            onKeyDown={(e) => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                    handleClick(job);
-                                }
-                            }}
-                            tabIndex={0}
-                            type="button"
                         >
-                            {job.thumbnail && (
-                                <img
-                                    src={job.thumbnail}
-                                    alt={job.title}
-                                    className="w-16 h-16 object-cover"
-                                />
-                            )}
-                            <div className="flex-1">
-                                <div
-                                    className="font-semibold leading-tight mb-1 font-base"
-                                    style={{ wordBreak: "break-word" }}
-                                >
-                                    {job.title}
-                                </div>
-                                <div className="font-xs">
-                                    Khu vực: {job.location || "Chưa cập nhật"}
-                                </div>
-                                <div className="font-xs">
-                                    Mức lương: {job.salary || "Thỏa thuận"}
-                                </div>
-                            </div>
-                        </button>
+                            <div className="card-title">{job.title}</div>
+                            <div className="card-subtitle">Khu vực: {job.location || "Chưa cập nhật"}</div>
+                            <div className="card-meta">Mức lương: {job.salary || "Thỏa thuận"}</div>
+                        </Card>
                     ))
                 )}
             </div>

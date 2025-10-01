@@ -1,5 +1,6 @@
 import Skeleton from "@/components/Skeleton";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "zmp-ui";
 import { useHotNews } from "./useHome";
 
 interface SliderImage {
@@ -9,6 +10,7 @@ interface SliderImage {
 
 
 const HomeSlider: React.FC = () => {
+    const navigate = useNavigate();
     const [sliderImages, setSliderImages] = useState<SliderImage[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -127,13 +129,46 @@ const HomeSlider: React.FC = () => {
                 onTouchEnd={handleImgTouchEnd}
             >
                 {sliderImages.map((img, idx) => (
-                    <img
+                    <button
                         key={img.id}
-                        src={img.thumbnail}
-                        alt={`Hot News ${idx}`}
-                        className={`absolute left-1/2 top-1/2 w-auto h-auto max-w-full max-h-full -translate-x-1/2 -translate-y-1/2 transition-opacity duration-700 ${idx === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-                            }`}
-                    />
+                        type="button"
+                        tabIndex={0}
+                        aria-label={`Xem chi tiết tin hot ${idx + 1}`}
+                        style={{
+                            position: "absolute",
+                            left: "50%",
+                            top: "50%",
+                            transform: "translate(-50%, -50%)",
+                            width: "100%",
+                            height: "100%",
+                            background: "none",
+                            border: "none",
+                            padding: 0,
+                            cursor: idx === currentIndex ? "pointer" : "default",
+                            opacity: idx === currentIndex ? 1 : 0,
+                            zIndex: idx === currentIndex ? 10 : 0,
+                            transition: "opacity 0.7s",
+                        }}
+                        onClick={() => navigate(`/news/${img.id}`)}
+                        onKeyDown={e => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                navigate(`/news/${img.id}`);
+                            }
+                        }}
+                        disabled={idx !== currentIndex}
+                    >
+                        <img
+                            src={img.thumbnail}
+                            alt={`Hot News ${idx}`}
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                                borderRadius: "inherit",
+                                pointerEvents: idx === currentIndex ? "auto" : "none",
+                            }}
+                        />
+                    </button>
                 ))}
 
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">

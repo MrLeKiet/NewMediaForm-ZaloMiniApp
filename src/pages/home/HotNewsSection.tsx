@@ -1,5 +1,4 @@
 import Skeleton from "@/components/Skeleton";
-import { Bell } from "lucide-react";
 import React from "react";
 import { useNavigate } from "zmp-ui";
 import { useHotNews } from "./useHome";
@@ -10,8 +9,8 @@ const HotNewsSection: React.FC = () => {
     if (loading) return (
         <div>
             <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap text-primary font-base font-bold">
-                    <Bell className="w-5 h-5" /> THÔNG BÁO MỚI NHẤT
+                <div className="flex items-center gap text-primary font-lg font-bold">
+                    THÔNG BÁO MỚI NHẤT
                 </div>
                 <button
                     className="text-xs px-3 py-1 font-semibold text-primary"
@@ -57,7 +56,7 @@ const HotNewsSection: React.FC = () => {
                     THÔNG BÁO MỚI NHẤT
                 </div>
                 <button
-                    className="bg-white text-xs px-3 py-1 font-semibold text-primary"
+                    className="text-xs px-3 py-1 font-semibold text-primary"
                     onClick={() => navigate("/news")}
                 >
                     Xem tất cả &gt;

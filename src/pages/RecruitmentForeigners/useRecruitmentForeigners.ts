@@ -1,7 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import { getRecruitmentForeignersJobs, getEnterpriseOptions } from "./api";
-
+import { getEnterpriseOptions, getRecruitmentForeignersJobs } from "./api";
 
 export interface FilterOption {
     value: string;
@@ -9,20 +8,46 @@ export interface FilterOption {
 }
 
 export function useFilterOptions() {
-    return useQuery<FilterOption[], Error>(
-        "enterprise-options",
-        async () => {
-            const data = await getEnterpriseOptions();
-            return data.map((item: any) => ({
-                value: item.value,
-                label: item.label,
-            }));
-        },
-        {
-            staleTime: 2 * 60 * 1000, // 2 minutes
-            cacheTime: 30 * 60 * 1000, // 1 hour
-        }
-    );
+    const [options, setOptions] = useState<FilterOption[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+
+    useEffect(() => {
+        let isMounted = true;
+        setIsLoading(true);
+        const fetchInitial = async () => {
+            try {
+                const data = await getEnterpriseOptions({ initialOnly: true });
+                if (isMounted) {
+                    setOptions(data.map((item: any) => ({ value: item.value, label: item.label })));
+                    setIsLoading(false);
+                }
+                // Fetch the rest in the background
+                fetchFull();
+            } catch (err) {
+                if (isMounted) {
+                    setError(err instanceof Error ? err : new Error(String(err)));
+                    setIsLoading(false);
+                }
+            }
+        };
+        const fetchFull = async () => {
+            try {
+                const fullData = await getEnterpriseOptions();
+                if (isMounted) {
+                    setOptions(fullData.map((item: any) => ({ value: item.value, label: item.label })));
+                }
+            } catch (err) {
+                if (isMounted) setError(err instanceof Error ? err : new Error(String(err)));
+            }
+        };
+        fetchInitial();
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    return { data: options, isLoading, error };
 }
 
 export function useRecruitmentJobs() {

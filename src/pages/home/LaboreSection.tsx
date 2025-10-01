@@ -1,3 +1,4 @@
+import Card from "@/components/Card";
 import Skeleton from "@/components/Skeleton";
 import React from "react";
 import { useLabore } from "./useHome";
@@ -37,23 +38,15 @@ const LaboreSection: React.FC = () => {
                     </div>
                 ) : (
                     labores.map((labore) => (
-                    <div key={labore.id} className="flex gap-3 items-center bg-white/5 rounded p-2">
-                        {labore.thumbnail && (
-                            <img
-                                src={labore.thumbnail}
-                                alt={labore.fullname}
-                                className="w-16 h-16 object-cover"
-                            />
-                        )}
-                        <div className="flex-1">
-                            <div className="font-semibold leading-tight mb-1 font-base" style={{ wordBreak: 'break-word' }}>{labore.fullname}</div>
-                            <div className="font-xs">
-                                Ngành nghề: {Array.isArray(labore.labore) ? labore.labore.join(", ") : (labore.labore || "Chưa cập nhật")}
-                            </div>
-                            <div className="font-xs">Nơi làm việc: {labore.location || "Thỏa thuận"}</div>
-                        </div>
-                    </div>
-                ))
+                        <Card
+                            key={labore.id}
+                            thumbnail={labore.thumbnail}
+                        >
+                            <div className="card-title">{labore.fullname}</div>
+                            <div className="card-subtitle">Ngành nghề: {Array.isArray(labore.labore) ? labore.labore.join(", ") : (labore.labore || "Chưa cập nhật")}</div>
+                            <div className="card-meta">Nơi làm việc: {labore.location || "Thỏa thuận"}</div>
+                        </Card>
+                    ))
             )}
             </div>
         </div>

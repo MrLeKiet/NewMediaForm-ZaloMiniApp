@@ -11,6 +11,7 @@
     --font-size-lg: 20px;
     --font-size-xl: 24px;
     --font-size-2xl: 32px;
+    background-color: #E53935;
 }
 
 .text-primary {
@@ -59,4 +60,22 @@
 
 .font-2xl {
     font-size: var(--font-size-2xl) !important;
+}
+
+.card-title {
+    color: var(--card-title-color, #1b1b1b);
+    font-size: var(--card-title-size, 1rem);
+    font-weight: 600;
+    line-height: 1.2;
+    word-break: break-word;
+}
+.card-subtitle {
+    color: var(--card-subtitle-color, #555);
+    font-size: var(--card-subtitle-size, 0.75rem);
+    font-weight: 400;
+}
+.card-meta {
+    color: var(--card-meta-color, #555);
+    font-size: var(--card-meta-size, 0.75rem);
+    font-weight: 400;
 }

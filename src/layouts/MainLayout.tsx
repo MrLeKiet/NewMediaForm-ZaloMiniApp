@@ -50,22 +50,22 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
     return (
         <NavbarVisibilityContext.Provider value={navbarContextValue}>
-            <div className="min-h-screen flex flex-col" style={{ padding: 0 }}>
+            <div className="max-h-screen flex flex-col" >
                 <div style={{ position: "sticky", top: 0, zIndex: 50 }}>
                     {isReturn ? <ReturnHeader /> : <Header />}
                 </div>
                 <div
-                    className="flex-1 flex flex-col px-3 pb-1 gap-4 overflow-y-auto"
+                    className="flex-1 flex flex-col gap-4 overflow-y-auto"
                     style={{
                         maxHeight: isReturn
-                            ? "calc(100vh - var(--safe-top) - var(--return-header-height) + 10px)"
+                            ? "calc(100vh - var(--return-header-height) - var(--navbar-height))"
                             : "calc(100vh - var(--safe-top) - var(--navbar-height) - var(--header-height) + 10px)",
                     }}
                 >
                     {children}
                 </div>
                 {isMain && showNavbar && (
-                    <div style={{ position: "sticky", bottom: 0, zIndex: 50 }}>
+                    <div>
                         <Navbar />
                     </div>
                 )}

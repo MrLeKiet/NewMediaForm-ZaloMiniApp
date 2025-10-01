@@ -1,4 +1,3 @@
-import MainLayout from "@/layouts/MainLayout";
 import JobBenefits from "./JobBenefits";
 import JobDescription from "./JobDescription";
 import JobEmployerInfo from "./JobEmployerInfo";
@@ -8,14 +7,14 @@ import JobRequirements from "./JobRequirements";
 
 const JobsDetailPage = () => {
 	return (
-		<MainLayout>
+		<div className="flex flex-col gap-4 px-4 pb-4">
 			<JobGeneralInfo />
 			<JobInformation />
 			<JobEmployerInfo />
 			<JobDescription />
 			<JobRequirements />
 			<JobBenefits />
-		</MainLayout>
+		</div>
 	);
 };
 

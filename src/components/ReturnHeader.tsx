@@ -22,7 +22,6 @@ const ReturnHeader: React.FC = () => {
                 </svg>
                 <span className="ml-1 text-lg font-medium">Quay lại</span>
             </button>
-
         </div>
     );
 };

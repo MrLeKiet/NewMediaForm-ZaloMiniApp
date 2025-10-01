@@ -48,7 +48,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
         <>
             <button
                 type="button"
-                className={`w-full flex items-center justify-between px-1 py-1 border-transparent text-base font-medium transition focus:outline-none`}
+                className={`bg-white h-12 w-full flex items-center rounded-lg justify-between px-3 border-transparent text-base font-medium transition focus:outline-none`}
                 onClick={handleOpen}
                 tabIndex={0}
                 aria-haspopup="listbox"
@@ -100,7 +100,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
-                        <ul className="space-y-1 overflow-y-auto h-[25vh]">
+                        <ul className="space-y-1 overflow-y-auto h-[40vh]">
                             {options
                                 .filter((option) =>
                                     typeof option.label === "string" &&
