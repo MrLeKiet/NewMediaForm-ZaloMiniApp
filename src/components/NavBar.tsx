@@ -32,7 +32,6 @@ const Navbar: React.FC = () => {
                         (!currentPath || currentPath === "/") && item.path === "/home"
                             ? true
                             : currentPath === item.path;
-
                     return (
                         <button
                             key={item.path}

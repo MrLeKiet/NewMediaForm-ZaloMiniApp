@@ -7,10 +7,10 @@ const Header: React.FC = () => {
             const height = headerRef.current.offsetHeight;
             document.documentElement.style.setProperty('--header-height', height + 'px');
         }
-        });
+    }, []);
     return (
 
-    <div ref={headerRef} className="bg-yellow-400 px-4 flex items-center" style={{ paddingTop: 'var(--safe-top)', paddingBottom: '10px' }}>
+    <div ref={headerRef} className="bg-[#E6F0FA] px-4 flex items-center shadow-sm" style={{ paddingTop: 'var(--safe-top)', paddingBottom: '10px' }}>
         <img
             src="https://thongtinvieclamkhanhhoa.vn/assets/images/brand/trung-tam-dich-viec-lam-logo-header.svg"
             alt="Logo Trung tâm dịch vụ việc làm Khánh Hòa"

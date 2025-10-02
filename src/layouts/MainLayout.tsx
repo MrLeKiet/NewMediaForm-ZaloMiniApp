@@ -52,12 +52,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
     return (
         <NavbarVisibilityContext.Provider value={navbarContextValue}>
-            <div className="bg-white h-[100vh] flex flex-col" >
+            <div className="h-[100vh] flex flex-col" >
                 <div style={{ position: "sticky", top: 0, zIndex: 50 }}>
                     {isReturn ? <ReturnHeader /> : <Header />}
                 </div>
                 <div
-                    className="bg-white flex-1 flex flex-col gap-4 overflow-y-auto"
+                    className="bg-[#E6F0FA] flex-1 flex flex-col gap-4 overflow-y-auto"
                     style={{
                         maxHeight: isReturn
                             ? "calc(100vh - var(--return-header-height))"

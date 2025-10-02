@@ -1,7 +1,7 @@
+import MultiSelectPanel from "@/components/MultiSelectPanel";
 import Skeleton from "@/components/Skeleton";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LaborerJobsFilter from "./LaborerJobsFilter";
 import ListCard from "./ListCard";
 import { useJobList, useLaborerJobsList, useSettings, useWards } from "./useLaborerJobsList";
 
@@ -51,58 +51,128 @@ const LaborerJobsListSection: React.FC = () => {
                 </button>
             </div>
 
-            {/* Filter Section */}
+            {/* Filter Section with MultiSelectPanel */}
             <div className="mb-4">
-                <LaborerJobsFilter
-                    activeTab={activeTab}
-                    settings={settings}
-                    wards={wards}
-                    filters={activeTab === 'laborer' ? laborerFilters : jobFilters}
-                    onFilterChange={(key, value) => {
-                        if (activeTab === 'laborer') {
-                            setLaborerFilters(prev => ({ ...prev, [key]: value }));
-                        } else {
-                            setJobFilters(prev => ({ ...prev, [key]: value }));
-                        }
-                    }}
-                />
+                {activeTab === 'laborer' ? (
+                    <MultiSelectPanel
+                        selects={[
+                            {
+                                key: "job",
+                                label: "Ngành đào tạo",
+                                options: [{ label: "Tất cả", value: "" }, ...(Array.isArray(settings.ListJob) ? settings.ListJob : [])],
+                                placeholder: "Chọn ngành đào tạo"
+                            },
+                            {
+                                key: "ward",
+                                label: "Địa điểm",
+                                options: [{ label: "Tất cả", value: "" }, ...wards.map(w => ({ label: w.text, value: w.value }))],
+                                placeholder: "Chọn địa điểm"
+                            },
+                            {
+                                key: "age",
+                                label: "Độ tuổi",
+                                options: [{ label: "Tất cả", value: "" }, ...(Array.isArray(settings.ListAge) ? settings.ListAge : [])],
+                                placeholder: "Chọn độ tuổi"
+                            },
+                            {
+                                key: "gender",
+                                label: "Giới tính",
+                                options: [{ label: "Tất cả", value: "" }, ...(Array.isArray(settings.ListGenderSearch) ? settings.ListGenderSearch : [])],
+                                placeholder: "Chọn giới tính"
+                            },
+                        ]}
+                        values={laborerFilters}
+                        onChange={(key, value) => setLaborerFilters(prev => ({ ...prev, [key]: value }))}
+                    />
+                ) : (
+                    <MultiSelectPanel
+                        selects={[
+                            {
+                                key: "job",
+                                label: "Ngành nghề",
+                                options: [{ label: "Tất cả", value: "" }, ...(Array.isArray(settings.ListJob) ? settings.ListJob : [])],
+                                placeholder: "Chọn ngành nghề"
+                            },
+                            {
+                                key: "ward",
+                                label: "Địa điểm",
+                                options: [{ label: "Tất cả", value: "" }, ...wards.map(w => ({ label: w.text, value: w.value }))],
+                                placeholder: "Chọn địa điểm"
+                            },
+                            {
+                                key: "salary",
+                                label: "Mức lương",
+                                options: [{ label: "Tất cả", value: "" }, ...(Array.isArray(settings.ListSalary) ? settings.ListSalary : [])],
+                                placeholder: "Chọn mức lương"
+                            },
+                            {
+                                key: "gender",
+                                label: "Giới tính",
+                                options: [{ label: "Tất cả", value: "" }, ...(Array.isArray(settings.ListGenderSearch) ? settings.ListGenderSearch : [])],
+                                placeholder: "Chọn giới tính"
+                            },
+                            {
+                                key: "workingTime",
+                                label: "Loại công việc",
+                                options: [{ label: "Tất cả", value: "" }, ...(Array.isArray(settings.ListWorkingTime) ? settings.ListWorkingTime : [])],
+                                placeholder: "Chọn loại công việc"
+                            },
+                        ]}
+                        values={jobFilters}
+                        onChange={(key, value) => setJobFilters(prev => ({ ...prev, [key]: value }))}
+                    />
+                )}
             </div>
 
             {/* List Section */}
             <div>
-                {activeTab === 'laborer' ? (
-                    loadingLaborer ? (
-                        <>
-                            <Skeleton className="h-24 mb-2" />
-                            <Skeleton className="h-24 mb-2" />
-                            <Skeleton className="h-24 mb-2" />
-                        </>
-                    ) : safeLaborerList.length > 0 ? (
-                        <ListCard
-                            type={'laborer'}
-                            data={safeLaborerList}
-                            onCardClick={handleLaborerCardClick}
-                        />
-                    ) : (
-                        <p className="text-center text-gray-500 py-8">Không có dữ liệu người tìm việc.</p>
-                    )
-                ) : (
-                    loadingJob ? (
-                        <>
-                            <Skeleton className="h-24 mb-2" />
-                            <Skeleton className="h-24 mb-2" />
-                            <Skeleton className="h-24 mb-2" />
-                        </>
-                    ) : safeJobList.length > 0 ? (
-                        <ListCard
-                            type={'joblist'}
-                            data={safeJobList}
-                            onCardClick={handleJobCardClick}
-                        />
-                    ) : (
-                        <p className="text-center text-gray-500 py-8">Không có dữ liệu việc làm.</p>
-                    )
-                )}
+                {(() => {
+                    if (activeTab === 'laborer') {
+                        if (loadingLaborer) {
+                            return (
+                                <>
+                                    <Skeleton className="h-24 mb-2" />
+                                    <Skeleton className="h-24 mb-2" />
+                                    <Skeleton className="h-24 mb-2" />
+                                </>
+                            );
+                        }
+                        if (safeLaborerList.length > 0) {
+                            return (
+                                <ListCard
+                                    type={'laborer'}
+                                    data={safeLaborerList}
+                                    onCardClick={handleLaborerCardClick}
+                                />
+                            );
+                        }
+                        return (
+                            <p className="text-center text-gray-500 py-8">Không có dữ liệu người tìm việc.</p>
+                        );
+                    } else {
+                        if (loadingJob) {
+                            return (
+                                <>
+                                    <Skeleton className="h-24 mb-2" />
+                                    <Skeleton className="h-24 mb-2" />
+                                    <Skeleton className="h-24 mb-2" />
+                                </>
+                            );
+                        }
+                        if (safeJobList.length > 0) {
+                            return (
+                                <ListCard
+                                    type={'joblist'}
+                                    data={safeJobList}
+                                    onCardClick={handleJobCardClick}
+                                />
+                            );
+                        }
+                        return (
+                            <p className="text-center text-gray-500 py-8">Không có dữ liệu việc làm.</p>
+                        );
+                    }
+                })()}
             </div>
         </div>
     );
