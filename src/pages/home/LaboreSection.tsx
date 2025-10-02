@@ -1,10 +1,21 @@
 import Card from "@/components/Card";
 import Skeleton from "@/components/Skeleton";
 import React from "react";
-import { useLabore } from "./useHome";
+import { useNavigate } from "zmp-ui";
+import { useLaborer } from "./useHome";
 
-const LaboreSection: React.FC = () => {
-    const { labores, loading, error } = useLabore();
+const LaborerSection: React.FC = () => {
+    const { laborers, loading, error } = useLaborer();
+    const navigate = useNavigate();
+
+    const handleClick = (laborer: any) => {
+        const id = laborer.id || laborer.laboreId || laborer.laboreId;
+        if (id) {
+            navigate(`/labore/${id}`);
+        } else {
+            alert("Không tìm thấy id công việc!");
+        }
+    };
 
     if (loading) return (
         <div >
@@ -27,7 +38,7 @@ const LaboreSection: React.FC = () => {
         </div>
     );
     if (error) return <div>Lỗi: {String(error)}</div>;
-    const isEmpty = !Array.isArray(labores) || labores.length === 0;
+    const isEmpty = !Array.isArray(laborers) || laborers.length === 0;
     return (
         <div>
             <div className="font-lg font-bold mb-1 text-primary">ỨNG VIÊN MỚI NHẤT</div>
@@ -37,20 +48,21 @@ const LaboreSection: React.FC = () => {
                         Không có ứng viên nào được tìm thấy.
                     </div>
                 ) : (
-                    labores.map((labore) => (
+                    laborers.map((laborer) => (
                         <Card
-                            key={labore.id}
-                            thumbnail={labore.thumbnail}
+                            key={laborer.id}
+                            thumbnail={laborer.thumbnail}
+                            onClick={() => handleClick(laborer)}
                         >
-                            <div className="card-title">{labore.fullname}</div>
-                            <div className="card-subtitle">Ngành nghề: {Array.isArray(labore.labore) ? labore.labore.join(", ") : (labore.labore || "Chưa cập nhật")}</div>
-                            <div className="card-meta">Nơi làm việc: {labore.location || "Thỏa thuận"}</div>
+                            <div className="card-title">{laborer.fullname}</div>
+                            <div className="card-subtitle">Ngành nghề: {Array.isArray(laborer.laborer) ? laborer.laborer.join(", ") : (laborer.laborer || "Chưa cập nhật")}</div>
+                            <div className="card-meta">Nơi làm việc: {laborer.location || "Thỏa thuận"}</div>
                         </Card>
                     ))
-            )}
+                )}
             </div>
         </div>
     );
 };
 
-export default LaboreSection;
+export default LaborerSection;

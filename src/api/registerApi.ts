@@ -5,7 +5,7 @@ export async function getSettings() {
   return response.data.Data;
 }
 
-export async function laboreSignUp(body: any) {
+export async function laborerSignUp(body: any) {
   const response = await api.post("/LaboreSignUp", body);
   return response.data;
 }

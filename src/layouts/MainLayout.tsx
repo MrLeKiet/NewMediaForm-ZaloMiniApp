@@ -15,6 +15,7 @@ const MAIN_ROUTES = [
 const RETURN_ROUTES = [
     "/news/",
     "/jobsdetail/",
+    "/labore/",
     "/register",
     "/auth",
     "/profile/edit"

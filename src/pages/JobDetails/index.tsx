@@ -7,7 +7,7 @@ import JobRequirements from "./JobRequirements";
 
 const JobsDetailPage = () => {
 	return (
-		<div className="">
+		<div className="mx-4">
 			<JobGeneralInfo />
 			<JobInformation />
 			<JobEmployerInfo />

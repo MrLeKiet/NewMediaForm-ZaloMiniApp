@@ -2,8 +2,7 @@ import HomeFilters from "./HomeFilters";
 import HomeSlider from "./HomeSlider";
 import HotNewsSection from "./HotNewsSection";
 import JobListSection from "./JobListSection";
-import LaboreSection from "./LaboreSection";
-
+import LaborerSection from "./LaboreSection";
 
 
 const HomePage = () => {
@@ -13,7 +12,7 @@ const HomePage = () => {
       <HomeFilters />
       <HotNewsSection />
       <JobListSection />
-      <LaboreSection />
+      <LaborerSection />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { getSettings, laboreSignUp, signIn } from "@/api/registerApi";
+import { getSettings, laborerSignUp, signIn } from "@/api/registerApi";
 import {
     Briefcase,
     Building,
@@ -406,8 +406,8 @@ const RegisterPage: React.FC = () => {
         fetchSettings();
     }, []);
 
-    // Map formData to API body for LaboreSignUp
-    function buildLaboreSignUpBody(formData: any) {
+    // Map formData to API body for LaborerSignUp
+    function buildLaborerSignUpBody(formData: any) {
         // Send DesiredCareer as an array of job IDs (strings)
         const desiredCareer = Array.isArray(formData.desiredJob)
             ? formData.desiredJob.map((id: string) => String(id))
@@ -459,9 +459,9 @@ const RegisterPage: React.FC = () => {
             return;
         }
         try {
-            const body = buildLaboreSignUpBody(formData);
+            const body = buildLaborerSignUpBody(formData);
             console.log("Sending access token:", accessToken);
-            const res = await laboreSignUp(body);
+            const res = await laborerSignUp(body);
             if (res.StatusResult?.Code === 0) {
                 setMessage("Đăng ký thành công!");
                 try {

@@ -31,7 +31,7 @@ export async function getUrgentJobRecruitment() {
     }
 }
 
-export async function getLaboreList() {
+export async function getLaborerList() {
     try {
         await delay(2500);
         const response = await api.get("/Labore", {
@@ -39,7 +39,7 @@ export async function getLaboreList() {
         });
         return response.data;
     } catch (error) {
-        console.error("Error fetching labore list:", error);
+        console.error("Error fetching laborer list:", error);
         throw error;
     }
 }

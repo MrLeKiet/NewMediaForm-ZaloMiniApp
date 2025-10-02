@@ -1,6 +1,6 @@
 
 import { useQuery } from "react-query";
-import { getHotNewsList, getLaboreList, getUrgentJobRecruitment } from "./api";
+import { getHotNewsList, getLaborerList, getUrgentJobRecruitment } from "./api";
 
 
 export function useUrgentJobs() {
@@ -29,14 +29,14 @@ export function useHotNews() {
 }
 
 
-export function useLabore() {
+export function useLaborer() {
     const { data, isLoading: loading, error } = useQuery(
-        ["labore-list"],
-        getLaboreList,
+        ["laborer-list"],
+        getLaborerList,
         {
             staleTime: 2 * 60 * 1000,
             cacheTime: 30 * 60 * 1000,
         }
     );
-    return { labores: data?.Data?.Data || [], loading, error };
+    return { laborers: data?.Data?.Data || [], loading, error };
 }

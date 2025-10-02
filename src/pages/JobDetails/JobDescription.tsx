@@ -16,9 +16,9 @@ const JobDescription: React.FC = () => {
     );
     if (error || !job) return <div>Error loading job details.</div>;
     return (
-        <div className="border-2 rounded-lg mb-4 mx-3">
-            <div className="bg-white font-bold text-center py-2 border-b">MÔ TẢ CÔNG VIỆC</div>
-            <div className="p-3 text-sm text-gray-800">
+        <div className="">
+            <div className="font-bold">MÔ TẢ CÔNG VIỆC</div>
+            <div className="text-sm text-gray-800 mx-2 space-y-1">
                 <div dangerouslySetInnerHTML={{ __html: job.summary || "Chưa có mô tả." }} />
             </div>
         </div>
